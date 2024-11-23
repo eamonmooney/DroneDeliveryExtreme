@@ -17,10 +17,7 @@ namespace droneDeliveryExtreme
             InitializeComponent();
         }
         //Determines if the player is currently moving in a direction
-        bool playerUp = false;
-        bool playerDown = false;
-        bool playerLeft = false;
-        bool playerRight = false;
+        bool playerUp, playerDown, playerLeft, playerRight = false;
 
         //Determines if the player has picked up the parcel
         bool parcelAttached = false;
@@ -28,28 +25,11 @@ namespace droneDeliveryExtreme
         //Determines if the parcel is currently in midair
         bool parcelFall = false;
 
-        //The fall speed of the parcel
-        int fallSpeed = 1;
+        //The fall speed of the parcel and player/enemies
+        int fallSpeed, playerFallSpeed, enemyFallSpeed, enemyFallSpeedB = 1;
 
-        //Count used to speed up the parcel until it reaches max speed, which is 10
-        int fallCount = 1;
-
-        //The fall speed of the player
-        int playerFallSpeed = 1;
-
-        //Count used to speed up the player when falling until it reaches max speed, which is 10
-        int playerFallCount = 1;
-
-        //The fall speed of the enemy
-        int enemyFallSpeed = 1;
-        //Count used to speed up the enemy when falling until it reaches max speed, which is 10
-        int enemyFallCount = 1;
-
-        //The fall speed of the enemy deliverer
-        int enemyFallSpeedB = 1;
-
-        //Count used to speed up the enemy deliverer when falling until it reaches max speed, which is 10
-        int enemyFallCountB = 1;
+        //Count used to speed up the object until it reaches max speed, which is 10
+        int fallCount, playerFallCount, enemyFallCount, enemyFallCountB = 1;
 
         //The current day
         int curDay = 1;
@@ -72,7 +52,7 @@ namespace droneDeliveryExtreme
         //How much cash has been earned in each day
         int[] cashEarned = new int[5];
 
-        //The total amount of parcels that need delivering for each day
+        //The total amount of parcels that need delivering for each day (Customisable)
         int[] totalParcels = { 5, 5, 5, 5, 5 };
 
         //How much time is currently left in the day
@@ -81,32 +61,11 @@ namespace droneDeliveryExtreme
         //Determines if the drone has run out of battery
         bool deadDrone = false;
 
-        //Determines if the player is shooting
-        bool playerShoot = false;
+        //Determines if a drone is shooting
+        bool playerShoot, enemyShoot, enemyShootB = false;
 
-        //Determines if the player is shooting in a direction
-        bool playerShootUp = false;
-        bool playerShootDown = false;
-        bool playerShootLeft = false;
-        bool playerShootRight = false;
-
-        //Determines if the enemy is shooting
-        bool enemyShoot = false;
-
-        //Determines if the enemy is shooting in a direction
-        bool enemyShootUp = false;
-        bool enemyShootDown = false;
-        bool enemyShootLeft = false;
-        bool enemyShootRight = false;
-
-        //Determines if the enemy deliverer is shooting
-        bool enemyShootB = false;
-
-        //Determines if the enemy deliverer is shooting in a direction
-        bool enemyShootUpB = false;
-        bool enemyShootDownB = false;
-        bool enemyShootLeftB = false;
-        bool enemyShootRightB = false;
+        //Determines if a drone is shooting in a direction
+        bool playerShootUp, playerShootDown, playerShootLeft, playerShootRight, enemyShootUp, enemyShootDown, enemyShootLeft, enemyShootRight, enemyShootUpB, enemyShootDownB, enemyShootLeftB, enemyShootRightB = false;
 
         //Determines if the parcel is currently damaged
         bool parcelDamaged = false;
@@ -115,10 +74,7 @@ namespace droneDeliveryExtreme
         bool parcelBroken = false;
 
         //Determines if an enemy is low on health
-        bool enemyDamaged = false;
-
-        //Determines if an enemy deliverer is low on health
-        bool enemyDamagedB = false;
+        bool enemyDamaged, enemyDamagedB = false;
 
         //Assigns a random value to playerWind, enemyWind, delivererWind, and randomNumber: each having a different seed value
         Random playerRng = new Random(DateTime.Now.Millisecond);
@@ -127,9 +83,7 @@ namespace droneDeliveryExtreme
         Random houseRng = new Random();
 
         //Random value from 1-4 that moves drones in a direction depending on the number
-        int playerWind;
-        int enemyWind;
-        int delivererWind;
+        int playerWind, enemyWind, delivererWind;
 
         //2D Array of what houses that have requested a delivery for each day
         int[,] houseCheck = new int[5, 5]; //[DAY, PARCEL]
@@ -140,12 +94,8 @@ namespace droneDeliveryExtreme
         //The set intensity of the wind for each day, odd numbers are left even numbers are right, the higher the number the higher the intensity
         int[] windDay = new int[5];
 
-        //Determines if the enemy is currently alive
-        bool enemyActivea = false;
-
-        //Determines if the enemy deliverer is currently alive
-        bool enemyActiveb = false;
-
+        //Determines if an enemy is currently alive
+        bool enemyActivea, enemyActiveb = false;
 
         //Determines if the player has delivered to the wrong house
         bool angryHouse = false;
@@ -178,18 +128,16 @@ namespace droneDeliveryExtreme
         char[] dayRank = new char[5];
 
         //Determines if the player has purchased a specific upgrade
-        bool droneUpgraded = false;
-        bool batteryUpgraded = false;
-        bool bulletsUpgraded = false;
+        bool droneUpgraded, batteryUpgraded, bulletsUpgraded = false;
 
         //Random number of 1-20 which decides if an enemy is going to spawn, and then spawn left or right, 1 being spawn left and 2 being spawn right
         int enemySpawner;
 
-        //The set high score made by the player at the end of the game, can be beaten if the player performs better in the next game
-        int highScore = 0;
-
         //Assigns a random value to enemySpawner
         Random spawnEnemy = new Random();
+
+        //The set high score made by the player at the end of the game, can be beaten if the player performs better in the next game
+        int highScore = 0;
 
         //Keeps player and enemies from passing through objects such as the top menu, ground, houses
         bool droneCollisions(int left, int right, int top, int bottom)
