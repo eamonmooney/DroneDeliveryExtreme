@@ -223,21 +223,13 @@ namespace droneDeliveryExtreme
         }
 
         //Identifies what enemy object has been hit with the bullet
-        int bulletCollision(int left, int right, int top, int bottom)
-        {
-            PictureBox[] evilPic = {enemyBulletU, enemyBulletD, enemyBulletL, enemyBulletR, enemyDrone, enemyBulletL2, enemyBulletR2, enemyDeliverer};
-            int numEnemy = evilPic.Length;
-            for (int count = 0; count < numEnemy; count++)
-            {
-                if ((left < evilPic[count].Right) &&
-                (right > evilPic[count].Left) &&
-                (top < evilPic[count].Bottom) &&
-                (bottom > evilPic[count].Top))
-                {
-                    return count;
-                }
-            }
-            return 10;
+        int bulletCollision(int left, int right, int top, int bottom){
+            PictureBox[] evilPics = {enemyBulletU, enemyBulletD, enemyBulletL, enemyBulletR, enemyDrone, enemyBulletL2, enemyBulletR2, enemyDeliverer};
+            for (PictureBox evilPic in evilPics){
+                if ((left < evilPic.Right) &&
+                (right > evilPic.Left) &&
+                (top < evilPic.Bottom) &&
+                (bottom > evilPic.Top)){return count;}}return 10;
         }
 
         //Detecting if the plyer is currently hovering over a purchaseable upgrade
