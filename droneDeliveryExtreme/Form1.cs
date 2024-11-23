@@ -17,128 +17,89 @@ namespace droneDeliveryExtreme
             InitializeComponent();
         }
         //Determines if the player is currently moving in a direction
-        bool playerUp, playerDown, playerLeft, playerRight = false;
-
+        bool playerUp = false, playerDown = false, playerLeft = false, playerRight = false;
         //Determines if the player has picked up the parcel
         bool parcelAttached = false;
-
         //Determines if the parcel is currently in midair
         bool parcelFall = false;
-
         //The fall speed of the parcel and player/enemies
-        int fallSpeed, playerFallSpeed, enemyFallSpeed, enemyFallSpeedB = 1;
-
+        int fallSpeed = 1, playerFallSpeed = 1, enemyFallSpeed = 1, enemyFallSpeedB = 1;
         //Count used to speed up the object until it reaches max speed, which is 10
-        int fallCount, playerFallCount, enemyFallCount, enemyFallCountB = 1;
-
+        int fallCount = 1, playerFallCount = 1, enemyFallCount = 1, enemyFallCountB = 1;
         //The current day
         int curDay = 1;
-
         //The players battery level
         int curBattery = 1000;
-
         //The players total cash
         int curCash = 0;
-
         //How many parcels have been dropped in a day
         int parcelsDelivered = 0;
-
         //How many parcels have been delivered to the correct houses in the day
         double parcelsDeliveredCorrectly = 0;
-
         //How many parcels have been delivered to the correct houses in each day
         double[] parcelsDeliveredAll = new double[5];
-
         //How much cash has been earned in each day
         int[] cashEarned = new int[5];
-
         //The total amount of parcels that need delivering for each day (Customisable)
         int[] totalParcels = { 5, 5, 5, 5, 5 };
-
         //How much time is currently left in the day
         int timeRemaining = 60;
-
         //Determines if the drone has run out of battery
         bool deadDrone = false;
-
         //Determines if a drone is shooting
-        bool playerShoot, enemyShoot, enemyShootB = false;
-
+        bool playerShoot = false, enemyShoot = false, enemyShootB = false;
         //Determines if a drone is shooting in a direction
-        bool playerShootUp, playerShootDown, playerShootLeft, playerShootRight, enemyShootUp, enemyShootDown, enemyShootLeft, enemyShootRight, enemyShootUpB, enemyShootDownB, enemyShootLeftB, enemyShootRightB = false;
-
+        bool playerShootUp = false, playerShootDown = false, playerShootLeft = false, playerShootRight = false, enemyShootUp = false, enemyShootDown = false, enemyShootLeft = false, enemyShootRight = false, enemyShootUpB = false, enemyShootDownB = false, enemyShootLeftB = false, enemyShootRightB = false;
         //Determines if the parcel is currently damaged
         bool parcelDamaged = false;
-
         //Determines if the parcel has been destroyed
         bool parcelBroken = false;
-
         //Determines if an enemy is low on health
         bool enemyDamaged, enemyDamagedB = false;
-
         //Assigns a random value to playerWind, enemyWind, delivererWind, and randomNumber: each having a different seed value
         Random playerRng = new Random(DateTime.Now.Millisecond);
         Random enemyRng = new Random(DateTime.Now.Millisecond + 1);
         Random delivererRng = new Random(DateTime.Now.Millisecond + 2);
         Random houseRng = new Random();
-
         //Random value from 1-4 that moves drones in a direction depending on the number
         int playerWind, enemyWind, delivererWind;
-
         //2D Array of what houses that have requested a delivery for each day
         int[,] houseCheck = new int[5, 5]; //[DAY, PARCEL]
-
         //2D Array of names of the houses that have requested a delivery
         string[,] houseName = new string[5, 5]; //[DAY, PARCEL]
-
         //The set intensity of the wind for each day, odd numbers are left even numbers are right, the higher the number the higher the intensity
         int[] windDay = new int[5];
-
         //Determines if an enemy is currently alive
-        bool enemyActivea, enemyActiveb = false;
-
+        bool enemyActivea = false, enemyActiveb = false;
         //Determines if the player has delivered to the wrong house
         bool angryHouse = false;
-
         //Represents what house the player has just delivered to
         int curHouse = 0;
-
         //Determines if the thrown chair is still midair
         bool houseShoot = false;
-
         //Represents what road the player is currently on
         int curRoad = 1;
-
         //Determines if all percels have been delivered and the player has access to the fourth area
         bool extraTime = false;
-
         //Determines if the player is currently inside the shop
         bool inShop = false;
-
         //The total points earned across the game
         int totalPts = 0;
-
         //The total points earned for each day
         int[] dayPts = new int[5];
-
         //The total rank based on the performance of the player across the game, set as F/E/D/C/B/A/S
         char totalRank;
-
         //The rank of the player performance across the day, set as F/E/D/C/B/A/S
         char[] dayRank = new char[5];
-
         //Determines if the player has purchased a specific upgrade
-        bool droneUpgraded, batteryUpgraded, bulletsUpgraded = false;
-
+        bool droneUpgraded = false, batteryUpgraded = false, bulletsUpgraded = false;
         //Random number of 1-20 which decides if an enemy is going to spawn, and then spawn left or right, 1 being spawn left and 2 being spawn right
         int enemySpawner;
-
         //Assigns a random value to enemySpawner
         Random spawnEnemy = new Random();
-
         //The set high score made by the player at the end of the game, can be beaten if the player performs better in the next game
         int highScore = 0;
-
+        
         //Keeps player and enemies from passing through objects such as the top menu, ground, houses
         bool droneCollisions(int left, int right, int top, int bottom){
             PictureBox[] obstacles = {landGrass, gameHud, house1, house2, house3};
@@ -255,107 +216,42 @@ namespace droneDeliveryExtreme
         //End the current day,
         //deactivates timers and moves objects out of the way and moves in and activated shop related objects,
         //displays a messagebox to the player their results in the day and how they performed
-        void endDay()
-        {
+        void endDay(){
             //refills battery at different levels depending if the battery upgrade has been purchased
-            if (batteryUpgraded == false)
-            {
-                curBattery = 1000;
-            }
-            else
-            {
-                curBattery = 2000;
-            }
+            if (batteryUpgraded == false){curBattery = 1000;}else{curBattery = 2000;}
 
             //temporarily stops all processes and removes all objects in preparation for the opening of the messagebox
-            parcelAttached = false;
-            deadDrone = false;
-            enemyActivea = false;
-            enemyBulletU.Top = enemyBulletU.Top - 1000;
-            enemyBulletD.Top = enemyBulletD.Top - 1000;
-            enemyBulletL.Left = enemyBulletL.Top - 1000;
-            enemyBulletR.Left = enemyBulletR.Top - 1500;
+            parcelAttached = false; deadDrone = false; enemyActivea = false;
+            enemyBulletU.Top -= 1000; enemyBulletD.Top -= 1000; enemyBulletL.Left -= 1000; enemyBulletR.Left -= 1500;
             enemyActiveb = false;
-            enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-            enemyBulletR2.Left = enemyBulletR2.Top - 1500;
+            enemyBulletL2.Left -= 1000; enemyBulletR2.Left -= 1500;
             extraTime = false;
-            playerTimer.Enabled = false;
-            timeTimer.Enabled = false;
-            batteryTimer.Enabled = false;
-            deliverTimer.Enabled = false;
-            collisionTimer.Enabled = false;
-            windTimer.Enabled = false;
-            angerTimer.Enabled = false;
-            windyTimer.Enabled = false;
-            playerMap.Visible = false;
-            angryHouse1.Visible = false;
-            angryHouse2.Visible = false;
-            angryHouse3.Visible = false;
-            playerParcel.Visible = false;
-            playerDrone.Visible = false;
-            enemyDrone.Visible = false;
-            enemyDeliverer.Visible = false;
+
+            Timer[] timers = {playerTimer , timeTimer, batteryTimer, deliverTimer, collisionTimer, windTimer, angerTimer, windyTimer};
+            foreach (Timer timer in timers) {timer.Enabled = false;}
+            PictureBox[] images = {playerMap, angryHouse1, angryHouse2, angryHouse3, playerParcel, playerDrone, enemyDrone, enemyDeliverer};
+            foreach (PictureBox image in images){image.Visible = false;}
 
             //Removes houses if on a road with houses, removes post office if on a road with a post office
-            if (curRoad == 0)
-            {
-                house1.Left -= 2000;
-                house2.Left -= 2000;
-                house3.Left -= 2000;
-            }
-            else if (curRoad == 1)
-            {
-                postOffice.Left -= 2000;
-            }
-            else if (curRoad == 2)
-            {
-                house1.Left -= 2000;
-                house2.Left -= 2000;
-                house3.Left -= 2000;
-            }
-            else if (curRoad == 3)
-            {
-                postOffice.Left -= 2000;
-            }
+            if (curRoad == 0){house1.Left -= 2000;house2.Left -= 2000;house3.Left -= 2000;}
+            else if (curRoad == 1){postOffice.Left -= 2000;}
+            else if (curRoad == 2){house1.Left -= 2000;house2.Left -= 2000;house3.Left -= 2000;}
+            else if (curRoad == 3){postOffice.Left -= 2000;}
             
             //Objective label updated to tell the player the day is over
             lblObjective.Text = "DAY COMPLETE";
 
             //A rank is determined based on the points gathered across the day
-            if (dayPts[curDay-1] >= 500)
-            {
-                dayRank[curDay - 1] = 'S';
-            }
-            else if (dayPts[curDay - 1] >= 400)
-            {
-                dayRank[curDay - 1] = 'A';
-            }
-            else if (dayPts[curDay - 1] >= 300)
-            {
-                dayRank[curDay - 1] = 'B';
-            }
-            else if (dayPts[curDay - 1] >= 200)
-            {
-                dayRank[curDay - 1] = 'C';
-            }
-            else if (dayPts[curDay - 1] >= 100)
-            {
-                dayRank[curDay - 1] = 'D';
-            }
-            else if (dayPts[curDay - 1] >= 50)
-            {
-                dayRank[curDay - 1] = 'E';
-            }
-            else if (dayPts[curDay - 1] < 50)
-            {
-                dayRank[curDay - 1] = 'F';
-            }
+            if (dayPts[curDay-1] >= 500){dayRank[curDay - 1] = 'S';}
+            else if (dayPts[curDay - 1] >= 400){dayRank[curDay - 1] = 'A';}
+            else if (dayPts[curDay - 1] >= 300){dayRank[curDay - 1] = 'B';}
+            else if (dayPts[curDay - 1] >= 200){dayRank[curDay - 1] = 'C';}
+            else if (dayPts[curDay - 1] >= 100){dayRank[curDay - 1] = 'D';}
+            else if (dayPts[curDay - 1] >= 50){dayRank[curDay - 1] = 'E';}
+            else if (dayPts[curDay - 1] < 50){dayRank[curDay - 1] = 'F';}
 
             //Player movement stops before messagebox opens
-            playerLeft = false;
-            playerRight = false;
-            playerUp = false;
-            playerDown = false;
+            playerLeft = false; playerRight = false; playerUp = false; playerDown = false;
 
             //Player is put back on the starting road
             curRoad = 1;
@@ -364,40 +260,19 @@ namespace droneDeliveryExtreme
             MessageBox.Show("DAY " + curDay + " COMPLETE" + "\n\nParcels delivered: " + parcelsDeliveredCorrectly + "/" + totalParcels[curDay - 1] + " * 50pts\nCash earned: " + cashEarned[curDay - 1] + " * 2pts\n\nPoints: " + dayPts[curDay-1] + "\nRank: " + dayRank[curDay-1]);
 
             //If all days are not complete, open the shop
-            if (curDay < 5)
-            {
+            if (curDay < 5){
                 //make all shop related objects appear
-                shop1.Visible = true;
-                shop2.Visible = true;
-                shop3.Visible = true;
-                if (batteryUpgraded == false)
-                {
-                    shopBattery.Visible = true;
-                    shopLbl1.Text = "Battery - 500";
-                }
-                if (droneUpgraded == false)
-                {
-                    shopDrone.Visible = true;
-                    shopLbl2.Text = "Wind resist - 200";
-                }
-                if (bulletsUpgraded == false)
-                {
-                    shopBullets.Visible = true;
-                    shopLbl3.Text = "Stronger bullets - 350";
-                }
-                shopLbl1.Visible = true;
-                shopLbl2.Visible = true;
-                shopLbl3.Visible = true;
+                shop1.Visible = true; shop2.Visible = true; shop3.Visible = true;
+                if (batteryUpgraded == false){shopBattery.Visible = true;shopLbl1.Text = "Battery - 500";}
+                if (droneUpgraded == false){shopDrone.Visible = true;shopLbl2.Text = "Wind resist - 200";}
+                if (bulletsUpgraded == false){shopBullets.Visible = true;shopLbl3.Text = "Stronger bullets - 350";}
+                shopLbl1.Visible = true; shopLbl2.Visible = true; shopLbl3.Visible = true;
 
                 //places the player at the top of the screen
-                playerDrone.Top = shopDrone.Top - 250;
-                playerDrone.Left = shopDrone.Left;
+                playerDrone.Top = shopDrone.Top - 250; playerDrone.Left = shopDrone.Left;
 
                 //Re enabled timers to allow for player movement
-                playerTimer.Enabled = true;
-                collisionTimer.Enabled = true;
-                windTimer.Enabled = true;
-                playerDrone.Visible = true;
+                playerTimer.Enabled = true; collisionTimer.Enabled = true; windTimer.Enabled = true; playerDrone.Visible = true;
 
                 //The shop is defined as currently open
                 inShop = true;
@@ -406,46 +281,22 @@ namespace droneDeliveryExtreme
                 lblObjective.Text = "SHOP - Press SPACE to buy and ENTER to continue";
             }
             //If all days are complete, end the game
-            else
-            {
+            else{
                 //Player is notified the game is over
                 lblObjective.Text = "GAME OVER";
 
                 //Total rank is calculated based upon the total points collected across the game
-                if (totalPts >= 2500)
-                {
-                    totalRank = 'S';
-                }
-                else if (totalPts >= 2000)
-                {
-                    totalRank = 'A';
-                }
-                else if (totalPts >= 1500)
-                {
-                    totalRank = 'B';
-                }
-                else if (totalPts >= 1000)
-                {
-                    totalRank = 'C';
-                }
-                else if (totalPts >= 500)
-                {
-                    totalRank = 'D';
-                }
-                else if (totalPts >= 250)
-                {
-                    totalRank = 'E';
-                }
-                else if (totalPts < 250)
-                {
-                    totalRank = 'F';
-                }
+                if (totalPts >= 2500){totalRank = 'S';}
+                else if (totalPts >= 2000){totalRank = 'A';}
+                else if (totalPts >= 1500){totalRank = 'B';}
+                else if (totalPts >= 1000){totalRank = 'C';}
+                else if (totalPts >= 500){totalRank = 'D';}
+                else if (totalPts >= 250){totalRank = 'E';}
+                else if (totalPts < 250){totalRank = 'F';}
 
                 //Checking if the new score beats the old high score
-                if (totalPts > highScore)
-                {
+                if (totalPts > highScore){
                     highScore = totalPts;
-
                     //Player is told that they have achived a new high score
                     MessageBox.Show("New high score!");
                 }
@@ -460,23 +311,15 @@ namespace droneDeliveryExtreme
                     "\n\nTotal Points: " + totalPts + "\nOverall Rank: " + totalRank + "\n\nHighscore: " + highScore);
 
                 //The game is restarted and a new house order is decided for each day
-                for (int x = 0; x < 5; x++)
-                {
-
+                for (int x = 0; x < 5; x++) {
                     //Allows for the random selcted houses to not have the same result twice in a day, meaning all deliveries will be different
                     HashSet<int> usedNumbers = new HashSet<int>();
-                    
-                    for (int y = 0; y < 5; y++)
-                    {
+
+                    for (int y = 0; y < 5; y++){
                         //Random number that is assigned to what houses have requested delivery for all of the days
                         int randomNumber;
-
-                        do
-                        {
-                            randomNumber = houseRng.Next(0, 6);
-                        }
+                        do{randomNumber = houseRng.Next(0, 6);}
                         while (usedNumbers.Contains(randomNumber));
-
                         houseCheck[x, y] = randomNumber;
                         houseName[x, y] = "House " + (randomNumber + 1);
                         usedNumbers.Add(randomNumber);
@@ -490,44 +333,30 @@ namespace droneDeliveryExtreme
                 inShop = false;
                 curDay = 1;
                 postOffice.Image = goodOfficePic.Image;
-                parcelsDelivered = 0;
-                parcelsDeliveredCorrectly = 0;
+                parcelsDelivered = 0; parcelsDeliveredCorrectly = 0;
                 curBattery = 1000;
                 curRoad = 1;
                 timeRemaining = 50;
                 playerMap.Image = map1a.Image;
-                playerTimer.Enabled = true;
-                timeTimer.Enabled = true;
-                batteryTimer.Enabled = true;
-                deliverTimer.Enabled = true;
-                collisionTimer.Enabled = true;
-                windTimer.Enabled = true;
-                angerTimer.Enabled = true;
-                windyTimer.Enabled = true;
+                Timer[] timers = {playerTimer , timeTimer, batteryTimer, deliverTimer, collisionTimer, windTimer, angerTimer, windyTimer};
+                foreach (Timer timer in timers) {timer.Enabled = true;}
                 playerParcel.Visible = true;
-                playerParcel.Top = parcelArea.Top;
-                playerParcel.Left = parcelArea.Left;
+                playerParcel.Top = parcelArea.Top; playerParcel.Left = parcelArea.Left;
                 postOffice.Left += 2000;
                 playerDrone.Top = shopDrone.Top - 250;
                 playerDrone.Left = shopDrone.Left;
                 curCash = 0;
                 totalPts = 0;
-                for (int j = 0; j < 5; j++)
-                {
+                for (int j = 0; j < 5; j++){
                     dayPts[j] = 0;
                     cashEarned[j] = 0;
                     parcelsDeliveredAll[j] = 0;
                 }
-                batteryUpgraded = false;
-                playerBattery2.Visible = false;
-                droneUpgraded = false;
-                bulletsUpgraded = false;
+                batteryUpgraded = false; playerBattery2.Visible = false;
+                droneUpgraded = false; bulletsUpgraded = false;
                 playerDrone.Image = playerDronePic.Image;
                 playerDrone.Visible = true;
-                playerBulletU.Image = playerBulletU3.Image;
-                playerBulletD.Image = playerBulletD3.Image;
-                playerBulletL.Image = playerBulletL3.Image;
-                playerBulletR.Image = playerBulletR3.Image;
+                playerBulletU.Image = playerBulletU3.Image; playerBulletD.Image = playerBulletD3.Image; playerBulletL.Image = playerBulletL3.Image; playerBulletR.Image = playerBulletR3.Image;
 
                 //Labels are updated to display the orignal values
                 lblDay.Text = "DAY: " + curDay;
