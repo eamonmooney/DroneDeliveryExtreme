@@ -160,16 +160,11 @@ namespace droneDeliveryExtreme
         }
 
         //Detecting if the player is currently touching the parcel, so they can pick them up
-        bool parcelCollisions(int left, int right, int top, int bottom)
-        {
+        bool parcelCollisions(int left, int right, int top, int bottom) {
             if ((left < playerParcel.Right) &&
                 (right > playerParcel.Left) &&
                 (top < playerParcel.Bottom) &&
-                (bottom > playerParcel.Top))
-            {
-                return true;
-            }
-            return false;
+                (bottom > playerParcel.Top)){return true;}return false;
         }
 
         //Detecting if the parcel has landed on the ground, destroying it
