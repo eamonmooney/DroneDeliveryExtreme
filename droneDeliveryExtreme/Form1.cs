@@ -225,7 +225,7 @@ namespace droneDeliveryExtreme
         //Identifies what enemy object has been hit with the bullet
         int bulletCollision(int left, int right, int top, int bottom){
             PictureBox[] evilPics = {enemyBulletU, enemyBulletD, enemyBulletL, enemyBulletR, enemyDrone, enemyBulletL2, enemyBulletR2, enemyDeliverer};
-            for (PictureBox evilPic in evilPics){
+            foreach (PictureBox evilPic in evilPics){
                 if ((left < evilPic.Right) &&
                 (right > evilPic.Left) &&
                 (top < evilPic.Bottom) &&
@@ -235,7 +235,7 @@ namespace droneDeliveryExtreme
         //Detecting if the plyer is currently hovering over a purchaseable upgrade
         bool shopCollisions(int left, int right, int top, int bottom){
             PictureBox[] shopPics = { shopBattery, shopDrone, shopBullets };
-            for (PictureBox shopPic in shopPics){
+            foreach (PictureBox shopPic in shopPics){
                 if ((left < shopPic.Right) &&
                 (right > shopPic.Left) &&
                 (top < shopPic.Bottom) &&
@@ -243,21 +243,13 @@ namespace droneDeliveryExtreme
         }
 
         //Identifies what upgrade the player is hovering over
-        int shopCheck(int left, int right, int top, int bottom)
-        {
-            PictureBox[] shopPic = { shopBattery, shopDrone, shopBullets };
-            int shopNum = shopPic.Length;
-            for (int count = 0; count < shopNum; count++)
-            {
-                if ((left < shopPic[count].Right) &&
-                (right > shopPic[count].Left) &&
-                (top < shopPic[count].Bottom) &&
-                (bottom > shopPic[count].Top))
-                {
-                    return count;
-                }
-            }
-            return 3;
+        int shopCheck(int left, int right, int top, int bottom){
+            PictureBox[] shopPics = { shopBattery, shopDrone, shopBullets };
+            foreach (PictureBox shopPic in shopPics){
+                if ((left < shopPic.Right) &&
+                (right > shopPic.Left) &&
+                (top < shopPic.Bottom) &&
+                (bottom > shopPic.Top)){return count;}count++;}return 3;
         }
 
         //End the current day,
