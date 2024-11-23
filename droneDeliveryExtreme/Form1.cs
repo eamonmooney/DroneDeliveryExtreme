@@ -150,22 +150,13 @@ namespace droneDeliveryExtreme
         }
 
         //Allows for parcels to be placed infront of a house, without passing through the ground
-        bool droneCollisionsExcHouse(int left, int right, int top, int bottom)
-        {
-            PictureBox[] noTouch = { landGrass, gameHud};
-            int numStuff = noTouch.Length;
-
-            for (int count = 0; count < numStuff; count++)
-            {
-                if ((left < noTouch[count].Right) &&
-                    (right > noTouch[count].Left) &&
-                    (top < noTouch[count].Bottom) &&
-                    (bottom > noTouch[count].Top))
-                {
-                    return true;
-                }
-            }
-            return false;
+        bool droneCollisionsExcHouse(int left, int right, int top, int bottom) {
+            PictureBox[] obstacles = {landGrass, gameHud};
+            foreach (PictureBox obstacle in obstacles){
+                if ((left < obstacle.Right) &&
+                    (right > obstacle.Left) &&
+                    (top < obstacle.Bottom) &&
+                    (bottom > obstacle.Top)) {return true;}return false;}
         }
 
         //Detecting if the player is currently touching the parcel, so they can pick them up
