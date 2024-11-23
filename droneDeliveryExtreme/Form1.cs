@@ -140,7 +140,7 @@ namespace droneDeliveryExtreme
         int highScore = 0;
 
         //Keeps player and enemies from passing through objects such as the top menu, ground, houses
-        bool droneCollisions(int left, int right, int top, int bottom) {
+        bool droneCollisions(int left, int right, int top, int bottom){
             PictureBox[] obstacles = {landGrass, gameHud, house1, house2, house3};
             foreach (PictureBox obstacle in obstacles){
                 if ((left < obstacle.Right) &&
@@ -150,7 +150,7 @@ namespace droneDeliveryExtreme
         }
 
         //Allows for parcels to be placed infront of a house, without passing through the ground
-        bool droneCollisionsExcHouse(int left, int right, int top, int bottom) {
+        bool droneCollisionsExcHouse(int left, int right, int top, int bottom){
             PictureBox[] obstacles = {landGrass, gameHud};
             foreach (PictureBox obstacle in obstacles){
                 if ((left < obstacle.Right) &&
@@ -160,7 +160,7 @@ namespace droneDeliveryExtreme
         }
 
         //Detecting if the player is currently touching the parcel, so they can pick them up
-        bool parcelCollisions(int left, int right, int top, int bottom) {
+        bool parcelCollisions(int left, int right, int top, int bottom){
             if ((left < playerParcel.Right) &&
                 (right > playerParcel.Left) &&
                 (top < playerParcel.Bottom) &&
@@ -168,16 +168,11 @@ namespace droneDeliveryExtreme
         }
 
         //Detecting if the parcel has landed on the ground, destroying it
-        bool groundCollisions(int left, int right, int top, int bottom)
-        {
+        bool groundCollisions(int left, int right, int top, int bottom){
             if ((left < landGrass.Right) &&
                 (right > landGrass.Left) &&
                 (top < landGrass.Bottom) &&
-                (bottom > landGrass.Top))
-            {
-                return true;
-            }
-            return false;
+                (bottom > landGrass.Top)){return true;}return false;
         }
 
         //Detecting if the angry houses thrown furniture has hit the player
