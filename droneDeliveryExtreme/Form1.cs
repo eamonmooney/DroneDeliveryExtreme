@@ -176,16 +176,11 @@ namespace droneDeliveryExtreme
         }
 
         //Detecting if the angry houses thrown furniture has hit the player
-        bool playerCollision(int left, int right, int top, int bottom)
-        {
+        bool playerCollision(int left, int right, int top, int bottom){
             if ((left < playerDrone.Right) &&
                 (right > playerDrone.Left) &&
                 (top < playerDrone.Bottom) &&
-                (bottom > playerDrone.Top))
-            {
-                return true;
-            }
-            return false;
+                (bottom > playerDrone.Top)){return true;}return false;
         }
 
         //Detecting if the parcel has been delivered in front of a house
