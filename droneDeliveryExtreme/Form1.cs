@@ -186,7 +186,7 @@ namespace droneDeliveryExtreme
         //Detecting if the parcel has been delivered in front of a house
         bool houseCollisions(int left, int right, int top, int bottom){
             PictureBox[] houses = {house1, house2, house3};
-            for (PictureBox house in houses){
+            foreach (PictureBox house in houses){
                 if ((left < house.Right) &&
                 (right > house.Left) &&
                 (top < hosue.Bottom) &&
@@ -194,25 +194,14 @@ namespace droneDeliveryExtreme
         }
 
         //Identifies what house the parcel has been placed
-        int houseNumCheck(int left, int right, int top, int bottom)
-        {
-            PictureBox[] housePic = { house1, house2, house3 };
-            int numHouse = housePic.Length;
-            for (int count = 0; count < numHouse; count++)
-            {
-                if ((left < housePic[count].Right) &&
-                (right > housePic[count].Left) &&
-                (top < housePic[count].Bottom) &&
-                (bottom > housePic[count].Top))
-                {
-                    if (curRoad == 2)
-                    {
-                        count += 3;
-                    }
-                    return count;
-                }
-            }
-            return 0;
+        int houseNumCheck(int left, int right, int top, int bottom){
+            PictureBox[] houses = { house1, house2, house3 };
+            int count = 0;
+            foreach (PictureBox house in houses){
+                if ((left < house.Right) &&
+                (right > house.Left) &&
+                (top < house.Bottom) &&
+                (bottom > house.Top)){if (curRoad == 2){count += 3;}return count;}count++;}return 0;
         }
 
         //Detecting if the player is currently touching their post office, so their battery can regenerate
