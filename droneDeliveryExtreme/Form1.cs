@@ -205,19 +205,11 @@ namespace droneDeliveryExtreme
         }
 
         //Detecting if the player is currently touching their post office, so their battery can regenerate
-        bool goodOfficeCollision(int left, int right, int top, int bottom)
-        {
+        bool goodOfficeCollision(int left, int right, int top, int bottom) {
             if ((left < postOffice.Right) &&
                 (right > postOffice.Left) &&
                 (top < postOffice.Bottom) &&
-                (bottom > postOffice.Top))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                (bottom > postOffice.Top)) {return true;}else{return false;}
         }
 
         //Detecting if a bullet has hit an enemy or an enemies bullet
