@@ -1,8 +1,6 @@
 ![image](https://github.com/user-attachments/assets/8e462ca9-07ab-464f-b006-f779faea3035)
 
-As far as i know this requires:
-- Microsoft Visual Studio 2019
-- Windows forms
+Built using Windows Forms
 
 You play as a delivery drone who must deliver their parcels day by day within time, an opposing delivery company isn't very happy about this, and will strive to destory you at all costs.
 
