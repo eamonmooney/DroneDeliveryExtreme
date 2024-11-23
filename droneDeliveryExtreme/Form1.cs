@@ -213,21 +213,13 @@ namespace droneDeliveryExtreme
         }
 
         //Detecting if a bullet has hit an enemy or an enemies bullet
-        bool enemyCollision(int left, int right, int top, int bottom)
-        {
-            PictureBox[] evilPic = {enemyDrone, enemyBulletU, enemyBulletD, enemyBulletL, enemyBulletR, enemyDeliverer, enemyBulletL2, enemyBulletR2 };
-            int numEnemy = evilPic.Length;
-            for (int count = 0; count < numEnemy; count++)
-            {
-                if ((left < evilPic[count].Right) &&
-                (right > evilPic[count].Left) &&
-                (top < evilPic[count].Bottom) &&
-                (bottom > evilPic[count].Top))
-                {
-                    return true;
-                }
-            }
-            return false;
+        bool enemyCollision(int left, int right, int top, int bottom) {
+            PictureBox[] evilPics = {enemyDrone, enemyBulletU, enemyBulletD, enemyBulletL, enemyBulletR, enemyDeliverer, enemyBulletL2, enemyBulletR2 };
+            foreach (PictureBox evilPic in evilPics){
+                if ((left < evilPic.Right) &&
+                (right > evilPic.Left) &&
+                (top < evilPic.Bottom) &&
+                (bottom > evilPic.Top)){return true;}}return false;
         }
 
         //Identifies what enemy object has been hit with the bullet
