@@ -385,43 +385,21 @@ namespace droneDeliveryExtreme
         {
             inShop = false;
             curDay++;
-            shop1.Visible = false;
-            shop2.Visible = false;
-            shop3.Visible = false;
-            shopBattery.Visible = false;
-            shopDrone.Visible = false;
-            shopBullets.Visible = false;
-            shopLbl1.Visible = false;
-            shopLbl2.Visible = false;
-            shopLbl3.Visible = false;
+            PictureBox[] images = {shop1, shop2, shop3, shopBattery, shopDrone, shopBullets, shopLbl1, shopLbl2, shopLbl3};
+            foreach (PictureBox image in images){image.Visible = false;}
             postOffice.Image = goodOfficePic.Image;
-            parcelsDelivered = 0;
-            parcelsDeliveredCorrectly = 0;
-            if (batteryUpgraded == false)
-            {
-                curBattery = 1000;
-            }
-            else
-            {
-                curBattery = 2000;
-            }
+            parcelsDelivered = 0; parcelsDeliveredCorrectly = 0;
+            if (batteryUpgraded == false){curBattery = 1000;}
+            else{curBattery = 2000;}
             curRoad = 1;
             timeRemaining = 50;
             playerMap.Image = map1a.Image;
-            playerTimer.Enabled = true;
-            timeTimer.Enabled = true;
-            batteryTimer.Enabled = true;
-            deliverTimer.Enabled = true;
-            collisionTimer.Enabled = true;
-            windTimer.Enabled = true;
-            angerTimer.Enabled = true;
-            windyTimer.Enabled = true;
+            Timer[] timers = {playerTimer , timeTimer, batteryTimer, deliverTimer, collisionTimer, windTimer, angerTimer, windyTimer};
+            foreach (Timer timer in timers) {timer.Enabled = true;}
             postOffice.Left += 2000;
-            playerDrone.Top = shopDrone.Top - 250;
-            playerDrone.Left = shopDrone.Left;
+            playerDrone.Top = shopDrone.Top - 250; playerDrone.Left = shopDrone.Left;
             playerParcel.Visible = true;
-            playerParcel.Left = parcelArea.Left;
-            playerParcel.Top = parcelArea.Top;
+            playerParcel.Left = parcelArea.Left; playerParcel.Top = parcelArea.Top;
             lblObjective.Text = "OBJECTIVE: Deliver to " + houseName[curDay - 1, parcelsDelivered];
             lblDay.Text = "DAY: " + curDay;
             lblCash.Text = "CASH: " + curCash;
