@@ -367,30 +367,17 @@ namespace droneDeliveryExtreme
         }
 
         //Allows the player to access the enemies post office once delivering all parcels
-        void startExtraTime()
-        {
+        void startExtraTime(){
             //Player can no longer deliver parcels
             deliverTimer.Enabled = false;
-
             //Extra time has begun
             extraTime = true;
-
             //Player is told what they can do during the extra time
             lblObjective.Text = "Use your remaining time to attack the opposing post office!";
-
             //Map is updated to display the new road that is avalible during extra time
-            if (curRoad == 0)
-            {
-                playerMap.Image = map0b.Image;
-            }
-            else if (curRoad == 1)
-            {
-                playerMap.Image = map1b.Image;
-            }
-            else if  (curRoad == 2)
-            {
-                playerMap.Image = map2b.Image;
-            }
+            if (curRoad == 0){playerMap.Image = map0b.Image;}
+            else if (curRoad == 1){playerMap.Image = map1b.Image;}
+            else if  (curRoad == 2){playerMap.Image = map2b.Image;}
         }
 
         //Re enables all timers and objects and updates information to be accurate to the new day
