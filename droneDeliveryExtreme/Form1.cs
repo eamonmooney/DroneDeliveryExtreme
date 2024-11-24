@@ -443,140 +443,67 @@ namespace droneDeliveryExtreme
         }
 
         //Allows for player control when a control button is pressed
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
+        private void Form1_KeyDown(object sender, KeyEventArgs e){
             //Player control is only avalible while the player is alive
-            if (deadDrone == false)
-            {
+            if (deadDrone == false){
                 //Moving the player up
-                if (e.KeyCode == Keys.W)
-                {
-                    playerUp = true;
-                }
+                if (e.KeyCode == Keys.W){playerUp = true;}
                 //Moving the player down
-                if (e.KeyCode == Keys.S)
-                {
-                    playerDown = true;
-                }
+                if (e.KeyCode == Keys.S){playerDown = true;}
                 //moving the player left
-                if (e.KeyCode == Keys.A)
-                {
-                    playerLeft = true;
-                }
+                if (e.KeyCode == Keys.A){playerLeft = true;}
                 //Moving the player right
-                if (e.KeyCode == Keys.D)
-                {
-                    playerRight = true;
-                }
-
+                if (e.KeyCode == Keys.D){playerRight = true;}
                 //Dropping and picking up parcels
-                if (e.KeyCode == Keys.Space && parcelCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom))
-                {
-                    if (parcelAttached == false)
-                    {
-                        parcelAttached = true;
-                    }
-                    else
-                    {
-                        parcelAttached = false;
-                        parcelFall = true;
-                    }
+                if (e.KeyCode == Keys.Space && parcelCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom)){
+                    if (parcelAttached == false){parcelAttached = true;}
+                    else{parcelAttached = false; parcelFall = true;}
                     curBattery = curBattery - 25;
                 }
-
                 //Scroll though the map while not inside the shop
-                if (inShop == false)
-                {
-                    if (parcelFall == false)
-                    {
+                if (inShop == false){
+                    if (parcelFall == false){
                         //Move left on the map
-                        if (e.KeyCode == Keys.Q)
-                        {
-                            if (curRoad == 0 && extraTime == true)
-                            {
+                        if (e.KeyCode == Keys.Q){
+                            if (curRoad == 0 && extraTime == true){
                                 curRoad = 3;
-                                house1.Left -= 2000;
-                                house2.Left -= 2000;
-                                house3.Left -= 2000;
+                                house1.Left -= 2000; house2.Left -= 2000; house3.Left -= 2000;
                                 postOffice.Image = badOfficePic.Image;
                                 postOffice.Left += 2000;
                                 playerMap.Image = map3.Image;
-                            }
-                            else if (curRoad == 1)
-                            {
-                                house1.Left += 2000;
-                                house2.Left += 2000;
-                                house3.Left += 2000;
-                                if (droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom))
-                                {
-                                    house1.Left -= 2000;
-                                    house2.Left -= 2000;
-                                    house3.Left -= 2000;
-                                }
-                                else
-                                {
+                            } else if (curRoad == 1){
+                                house1.Left += 2000; house2.Left += 2000; house3.Left += 2000;
+                                if (droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom)){
+                                    house1.Left -= 2000; house2.Left -= 2000; house3.Left -= 2000; 
+                                } else {
                                     curRoad--;
                                     postOffice.Left -= 2000;
-                                    if (playerParcel.Visible == true && parcelAttached == false && droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom + 6))
-                                    {
+                                    if (playerParcel.Visible == true && parcelAttached == false && droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom + 6)){
                                         playerParcel.Visible = false;
                                         playerParcel.Left -= 1000;
                                     }
-                                    house1.Image = housePic1.Image;
-                                    house2.Image = housePic2.Image;
-                                    house3.Image = housePic3.Image;
-                                    house1.Visible = true;
-                                    house2.Visible = true;
-                                    house3.Visible = true;
-                                    if (extraTime == false)
-                                    {
-                                        playerMap.Image = map0a.Image;
-                                    }
-                                    else
-                                    {
-                                        playerMap.Image = map0b.Image;
-                                    }
+                                    house1.Image = housePic1.Image; house2.Image = housePic2.Image; house3.Image = housePic3.Image;
+                                    house1.Visible = true; house2.Visible = true; house3.Visible = true;
+                                    if (extraTime == false){playerMap.Image = map0a.Image;}
+                                    else{playerMap.Image = map0b.Image;}
                                 }
-                            }
-                            else if (curRoad == 2)
-                            {
+                            } else if (curRoad == 2) {
                                 curRoad--;
-                                house1.Left -= 2000;
-                                house2.Left -= 2000;
-                                house3.Left -= 2000;
+                                house1.Left -= 2000; house2.Left -= 2000; house3.Left -= 2000;
                                 postOffice.Left += 2000;
-                                if (playerParcel.Visible == false && parcelsDelivered < 5)
-                                {
-                                    playerParcel.Left = parcelArea.Left;
-                                    playerParcel.Top = parcelArea.Top;
+                                if (playerParcel.Visible == false && parcelsDelivered < 5){
+                                    playerParcel.Left = parcelArea.Left; playerParcel.Top = parcelArea.Top;
                                     playerParcel.Visible = true;
                                 }
-                                if (extraTime == false)
-                                {
-                                    playerMap.Image = map1a.Image;
-                                }
-                                else
-                                {
-                                    playerMap.Image = map1b.Image;
-                                }
-                            }
-                            else if (curRoad == 3)
-                            {
-                                house1.Left += 2000;
-                                house2.Left += 2000;
-                                house3.Left += 2000;
-                                if (droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom))
-                                {
-                                    house1.Left -= 2000;
-                                    house2.Left -= 2000;
-                                    house3.Left -= 2000;
-                                }
-                                else
-                                {
+                                if (extraTime == false){playerMap.Image = map1a.Image;}
+                                else{playerMap.Image = map1b.Image;}
+                            } else if (curRoad == 3) {
+                                house1.Left += 2000; house2.Left += 2000; house3.Left += 2000;
+                                if (droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom)){
+                                    house1.Left -= 2000; house2.Left -= 2000; house3.Left -= 2000;
+                                } else{
                                     curRoad = 0;
-                                    house1.Image = housePic1.Image;
-                                    house2.Image = housePic2.Image;
-                                    house3.Image = housePic3.Image;
+                                    house1.Image = housePic1.Image; house2.Image = housePic2.Image; house3.Image = housePic3.Image;
                                     postOffice.Left -= 2000;
                                     postOffice.Image = goodOfficePic.Image;
                                     playerMap.Image = map0b.Image;
@@ -585,94 +512,47 @@ namespace droneDeliveryExtreme
                         }
 
                         //Move right on the map
-                        if (e.KeyCode == Keys.E)
-                        {
-                            if (curRoad == 0)
-                            {
+                        if (e.KeyCode == Keys.E){
+                            if (curRoad == 0){
                                 curRoad++;
-                                house1.Left -= 2000;
-                                house2.Left -= 2000;
-                                house3.Left -= 2000;
+                                house1.Left -= 2000; house2.Left -= 2000; house3.Left -= 2000;
                                 postOffice.Left += 2000;
-                                if (playerParcel.Visible == false && parcelsDelivered < 5)
-                                {
-                                    playerParcel.Left = parcelArea.Left;
-                                    playerParcel.Top = parcelArea.Top;
+                                if (playerParcel.Visible == false && parcelsDelivered < 5){
+                                    playerParcel.Left = parcelArea.Left; playerParcel.Top = parcelArea.Top;
                                     playerParcel.Visible = true;
                                 }
-                                if (extraTime == false)
-                                {
-                                    playerMap.Image = map1a.Image;
-                                }
-                                else
-                                {
-                                    playerMap.Image = map1b.Image;
-                                }
-                            }
-                            else if (curRoad == 1)
-                            {
-                                house1.Left += 2000;
-                                house2.Left += 2000;
-                                house3.Left += 2000;
-                                if (droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom))
-                                {
-                                    house1.Left -= 2000;
-                                    house2.Left -= 2000;
-                                    house3.Left -= 2000;
-                                }
-                                else
-                                {
+                                if (extraTime == false){playerMap.Image = map1a.Image;}
+                                else{playerMap.Image = map1b.Image;}
+                            }else if (curRoad == 1){
+                                house1.Left += 2000; house2.Left += 2000; house3.Left += 2000;
+                                if (droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom)) {
+                                    house1.Left -= 2000; house2.Left -= 2000; house3.Left -= 2000;
+                                } else{
                                     curRoad++;
                                     postOffice.Left -= 2000;
-                                    if (playerParcel.Visible == true && parcelAttached == false && droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom + 6))
-                                    {
+                                    if (playerParcel.Visible == true && parcelAttached == false && droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom + 6)){
                                         playerParcel.Visible = false;
                                         playerParcel.Left -= 1000;
                                     }
-                                    house1.Image = housePic4.Image;
-                                    house2.Image = housePic5.Image;
-                                    house3.Image = housePic6.Image;
-                                    house1.Visible = true;
-                                    house2.Visible = true;
-                                    house3.Visible = true;
-                                    if (extraTime == false)
-                                    {
-                                        playerMap.Image = map2a.Image;
-                                    }
-                                    else
-                                    {
-                                        playerMap.Image = map2b.Image;
-                                    }
+                                    house1.Image = housePic4.Image; house2.Image = housePic5.Image; house3.Image = housePic6.Image;
+                                    house1.Visible = true; house2.Visible = true; house3.Visible = true;
+                                    if (extraTime == false){playerMap.Image = map2a.Image;}
+                                    else{playerMap.Image = map2b.Image;}
                                 }
-                            }
-                            else if (curRoad == 2 && extraTime == true)
-                            {
+                            }else if (curRoad == 2 && extraTime == true){
                                 curRoad = 3;
-                                house1.Left -= 2000;
-                                house2.Left -= 2000;
-                                house3.Left -= 2000;
+                                house1.Left -= 2000; house2.Left -= 2000; house3.Left -= 2000;
                                 postOffice.Image = badOfficePic.Image;
                                 postOffice.Left += 2000;
                                 playerMap.Image = map3.Image;
-                            }
-                            else if (curRoad == 3)
-                            {
-                                house1.Left += 2000;
-                                house2.Left += 2000;
-                                house3.Left += 2000;
-                                if (droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom))
-                                {
-                                    house1.Left -= 2000;
-                                    house2.Left -= 2000;
-                                    house3.Left -= 2000;
-                                }
-                                else
-                                {
+                            } else if (curRoad == 3) {
+                                house1.Left += 2000; house2.Left += 2000; house3.Left += 2000;
+                                if (droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom)){
+                                    house1.Left -= 2000; house2.Left -= 2000; house3.Left -= 2000;
+                                } else{
                                     curRoad = 2;
                                     postOffice.Left -= 2000;
-                                    house1.Image = housePic4.Image;
-                                    house2.Image = housePic5.Image;
-                                    house3.Image = housePic6.Image;
+                                    house1.Image = housePic4.Image; house2.Image = housePic5.Image; house3.Image = housePic6.Image;
                                     postOffice.Image = goodOfficePic.Image;
                                     playerMap.Image = map2b.Image;
                                 }
@@ -680,24 +560,13 @@ namespace droneDeliveryExtreme
                         }
                     }
                     //Open the map
-                    if (e.KeyCode == Keys.M)
-                    {
-                        playerMap.Visible = true;
-                    }
-                }
-                else
-                {
+                    if (e.KeyCode == Keys.M){playerMap.Visible = true;}
+                }else{
                     //Start a new day and exit the shop
-                    if (e.KeyCode == Keys.Enter)
-                    {
-                        newDay();
-                    }
-
+                    if (e.KeyCode == Keys.Enter){newDay();}
                     //Purchasing upgrades in the shop
-                    if (e.KeyCode == Keys.Space && shopCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom))
-                    {
-                        if (shopCheck(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) == 0 && batteryUpgraded == false && curCash >= 500)
-                        {
+                    if (e.KeyCode == Keys.Space && shopCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom)){
+                        if (shopCheck(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) == 0 && batteryUpgraded == false && curCash >= 500){
                             curCash -= 500;
                             shopBattery.Visible = false;
                             lblCash.Text = "CASH: " + curCash;
@@ -706,8 +575,7 @@ namespace droneDeliveryExtreme
                             curBattery = 2000;
                             playerBattery2.Visible = true;
                         }
-                        if (shopCheck(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) == 1 && droneUpgraded == false && curCash >= 200)
-                        {
+                        if (shopCheck(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) == 1 && droneUpgraded == false && curCash >= 200){
                             curCash -= 200;
                             shopDrone.Visible = false;
                             lblCash.Text = "CASH: " + curCash;
@@ -715,17 +583,13 @@ namespace droneDeliveryExtreme
                             playerDrone.Image = playerDronePic2.Image;
                             droneUpgraded = true;
                         }
-                        if (shopCheck(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) == 2 && bulletsUpgraded == false && curCash >= 350)
-                        {
+                        if (shopCheck(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) == 2 && bulletsUpgraded == false && curCash >= 350){
                             curCash -= 350;
                             shopBullets.Visible = false;
                             lblCash.Text = "CASH: " + curCash;
                             shopLbl3.Text = "SOLD";
                             bulletsUpgraded = true;
-                            playerBulletU.Image = playerBulletU2.Image;
-                            playerBulletD.Image = playerBulletD2.Image;
-                            playerBulletL.Image = playerBulletL2.Image;
-                            playerBulletR.Image = playerBulletR2.Image;
+                            playerBulletU.Image = playerBulletU2.Image; playerBulletD.Image = playerBulletD2.Image; playerBulletL.Image = playerBulletL2.Image; playerBulletR.Image = playerBulletR2.Image;
                         }
                     }
                 }
