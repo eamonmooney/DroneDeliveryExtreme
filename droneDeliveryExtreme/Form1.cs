@@ -381,8 +381,7 @@ namespace droneDeliveryExtreme
         }
 
         //Re enables all timers and objects and updates information to be accurate to the new day
-        void newDay()
-        {
+        void newDay(){
             inShop = false;
             curDay++;
             PictureBox[] images = {shop1, shop2, shop3, shopBattery, shopDrone, shopBullets, shopLbl1, shopLbl2, shopLbl3};
@@ -408,49 +407,36 @@ namespace droneDeliveryExtreme
         }
 
         //Responsible for moving the player when under control
-        private void playerTimer_Tick(object sender, EventArgs e)
-        {
+        private void playerTimer_Tick(object sender, EventArgs e){
             //Moving the player up
-            if ((playerUp == true) && (!droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top-6, playerDrone.Bottom)))
-            {
+            if ((playerUp == true) && (!droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top-6, playerDrone.Bottom))){
                 playerDrone.Top = playerDrone.Top - 5;
-
                 //Moving the parcel up when attached
-                if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top-6, playerParcel.Bottom)))
-                {
+                if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top-6, playerParcel.Bottom))){
                     playerParcel.Top = playerParcel.Top - 5;
                 }
             }
             //Moving the player down
-            if ((playerDown == true) && (!droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom+6)))
-            {
+            if ((playerDown == true) && (!droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom+6))){
                 playerDrone.Top = playerDrone.Top + 5;
-
                 //Moving the parcel down when attached
-                if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom+6)))
-                {
+                if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom+6))){
                     playerParcel.Top = playerParcel.Top + 5;
                 }
             }
             //moving the player left
-            if ((playerLeft == true) && (!droneCollisions(playerDrone.Left-6, playerDrone.Right, playerDrone.Top, playerDrone.Bottom)) && !(playerDrone.Left < this.Width - 1000))
-            {
+            if ((playerLeft == true) && (!droneCollisions(playerDrone.Left-6, playerDrone.Right, playerDrone.Top, playerDrone.Bottom)) && !(playerDrone.Left < this.Width - 1000)){
                 playerDrone.Left = playerDrone.Left - 5;
-
                 //Moving the parcel left when attached
-                if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left-6, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)))
-                {
+                if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left-6, playerParcel.Right, playerParcel.Top, playerParcel.Bottom))){
                     playerParcel.Left = playerParcel.Left - 5;
                 }
             }
             //Moving the player right
-            if ((playerRight == true) && (!droneCollisions(playerDrone.Left, playerDrone.Right+6, playerDrone.Top, playerDrone.Bottom)) && !(playerDrone.Right > this.Width - 30))
-            {
+            if ((playerRight == true) && (!droneCollisions(playerDrone.Left, playerDrone.Right+6, playerDrone.Top, playerDrone.Bottom)) && !(playerDrone.Right > this.Width - 30)){
                 playerDrone.Left = playerDrone.Left + 5;
-
                 //Moving the parcel right when attached
-                if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right+6, playerParcel.Top, playerParcel.Bottom)))
-                {
+                if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right+6, playerParcel.Top, playerParcel.Bottom))){
                     playerParcel.Left = playerParcel.Left + 5;
                 }
             }
