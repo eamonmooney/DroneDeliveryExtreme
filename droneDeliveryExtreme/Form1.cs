@@ -597,92 +597,50 @@ namespace droneDeliveryExtreme
         }
 
         //Allows for player control to stop when a control button is released
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (deadDrone == false)
-            {
+        private void Form1_KeyUp(object sender, KeyEventArgs e){
+            if (deadDrone == false){
                 //Stop moving up
-                if (e.KeyCode == Keys.W)
-                {
-                    playerUp = false;
-                }
+                if (e.KeyCode == Keys.W){playerUp = false;}
                 //Stop moving down
-                if (e.KeyCode == Keys.S)
-                {
-                    playerDown = false;
-                }
+                if (e.KeyCode == Keys.S){playerDown = false;}
                 //Stop moving left
-                if (e.KeyCode == Keys.A)
-                {
-                    playerLeft = false;
-                }
+                if (e.KeyCode == Keys.A){playerLeft = false;}
                 //Stop moving right
-                if (e.KeyCode == Keys.D)
-                {
-                    playerRight = false;
-                }
-
+                if (e.KeyCode == Keys.D){playerRight = false;}
                 //Shoot up
-                if (e.KeyCode == Keys.Up)
-                {
-
-                    if (playerShootUp == false && playerShoot == false)
-                    {
-                        playerBulletU.Left = playerDrone.Left;
-                        playerBulletU.Top = playerDrone.Top;
-                        playerShoot = true;
-                        playerShootUp = true;
+                if (e.KeyCode == Keys.Up){
+                    if (playerShootUp == false && playerShoot == false){
+                        playerBulletU.Left = playerDrone.Left; playerBulletU.Top = playerDrone.Top;
+                        playerShoot = true; playerShootUp = true;
                         curBattery = curBattery - 10;
                     }
                 }
-
                 //Shoot down
-                if (e.KeyCode == Keys.Down)
-                {
-
-                    if (playerShootDown == false && playerShoot == false)
-                    {
-                        playerBulletD.Left = playerDrone.Left;
-                        playerBulletD.Top = playerDrone.Top;
-                        playerShoot = true;
-                        playerShootDown = true;
+                if (e.KeyCode == Keys.Down){
+                    if (playerShootDown == false && playerShoot == false){
+                        playerBulletD.Left = playerDrone.Left; playerBulletD.Top = playerDrone.Top;
+                        playerShoot = true; playerShootDown = true;
                         curBattery = curBattery - 10;
                     }
                 }
-
                 //Shoot left
-                if (e.KeyCode == Keys.Left)
-                {
-
-                    if (playerShootLeft == false && playerShoot == false)
-                    {
-                        playerBulletL.Left = playerDrone.Left;
-                        playerBulletL.Top = playerDrone.Top;
-                        playerShoot = true;
-                        playerShootLeft = true;
+                if (e.KeyCode == Keys.Left) {
+                    if (playerShootLeft == false && playerShoot == false){
+                        playerBulletL.Left = playerDrone.Left; playerBulletL.Top = playerDrone.Top;
+                        playerShoot = true; playerShootLeft = true;
                         curBattery = curBattery - 10;
                     }
                 }
-
                 //Shoot right
-                if (e.KeyCode == Keys.Right)
-                {
-
-                    if (playerShootRight == false && playerShoot == false)
-                    {
-                        playerBulletR.Left = playerDrone.Left;
-                        playerBulletR.Top = playerDrone.Top;
-                        playerShoot = true;
-                        playerShootRight = true;
+                if (e.KeyCode == Keys.Right){
+                    if (playerShootRight == false && playerShoot == false){
+                        playerBulletR.Left = playerDrone.Left; playerBulletR.Top = playerDrone.Top;
+                        playerShoot = true; playerShootRight = true;
                         curBattery = curBattery - 10;
                     }
                 }
-
                 //Closes map
-                if (e.KeyCode == Keys.M)
-                {
-                    playerMap.Visible = false;
-                }
+                if (e.KeyCode == Keys.M){playerMap.Visible = false;}
             }
         }
 
