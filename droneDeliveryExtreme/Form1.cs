@@ -806,174 +806,97 @@ namespace droneDeliveryExtreme
         }
 
         //Responsible for the shooting of both the player and enemies, finding what the bullet has hit using collision
-        private void shootTimer_Tick(object sender, EventArgs e)
-        {
+        private void shootTimer_Tick(object sender, EventArgs e){
             //The player can only shoot 1 bullet at a time
-            if (playerShoot == true)
-            {
+            if (playerShoot == true){
                 //Player shooting up
-                if (playerShootUp == true)
-                {
+                if (playerShootUp == true){
                     playerBulletU.Top = playerBulletU.Top - 10;
                     //Bullet dissapearing allowing for another shot
-                    if (playerBulletU.Bottom < 0)
-                    {
-                        playerShoot = false;
-                        playerShootUp = false;
-                    }
+                    if (playerBulletU.Bottom < 0){playerShoot = false; playerShootUp = false;}
                     //Detecting what object the bullet has collided with
-                    else if (enemyCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom))
-                    {
+                    else if (enemyCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom)){
                         //enemyBulletU
-                        if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 0)
-                        {
-                            playerBulletU.Top = playerBulletU.Top - 1000;
-                            enemyBulletU.Top = enemyBulletU.Top - 1000;
+                        if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 0){
+                            playerBulletU.Top = playerBulletU.Top - 1000; enemyBulletU.Top = enemyBulletU.Top - 1000;
                         }
                         //enemyBulletD
-                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 1)
-                        {
-                            playerBulletU.Top = playerBulletU.Top - 1000;
-                            enemyBulletD.Top = enemyBulletD.Top + 1000;
+                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 1){
+                            playerBulletU.Top = playerBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top + 1000;
                         }
                         //enemyBulletL
-                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 2)
-                        {
-                            playerBulletU.Top = playerBulletU.Top - 1000;
-                            enemyBulletL.Left = enemyBulletL.Left - 1000;
+                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 2){
+                            playerBulletU.Top = playerBulletU.Top - 1000; enemyBulletL.Left = enemyBulletL.Left - 1000;
                         }
                         //enemyBulletR
-                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 3)
-                        {
-                            playerBulletU.Top = playerBulletU.Top - 1000;
-                            enemyBulletR.Left = enemyBulletR.Left + 1000;
+                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 3){
+                            playerBulletU.Top = playerBulletU.Top - 1000; enemyBulletR.Left = enemyBulletR.Left + 1000;
                         }
                         //enemyDrone
-                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 4)
-                        {
+                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 4){
                             playerBulletU.Top = playerBulletU.Top - 1000;
                             //Destroyed in two shots without an upgrade
-                            if (bulletsUpgraded == false)
-                            {
-                                if (enemyDamaged == true)
-                                {
-                                    if (batteryUpgraded == false)
-                                    {
-                                        if (curBattery < 1000)
-                                        {
-                                            curBattery += 50;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (curBattery < 2000)
-                                        {
-                                            curBattery += 50;
-                                        }
+                            if (bulletsUpgraded == false){
+                                if (enemyDamaged == true){
+                                    if (batteryUpgraded == false){
+                                        if (curBattery < 1000){curBattery += 50;}
+                                    } else{
+                                        if (curBattery < 2000){curBattery += 50;}
                                     }
                                     enemyActivea = false;
-                                    enemyBulletU.Top = enemyBulletU.Top - 1000;
-                                    enemyBulletD.Top = enemyBulletD.Top - 1000;
-                                    enemyBulletL.Left = enemyBulletL.Top - 1000;
-                                    enemyBulletR.Left = enemyBulletR.Top - 1500;
+                                    enemyBulletU.Top = enemyBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top - 1000;
+                                    enemyBulletL.Left = enemyBulletL.Top - 1000; enemyBulletR.Left = enemyBulletR.Top - 1500;
                                 }
-                                else
-                                {
-                                    enemyDamaged = true;
-                                }
+                                else {enemyDamaged = true;}
                             }
                             //Destroyed in one shot with an upgrade
-                            else
-                            {
-                                if (batteryUpgraded == false)
-                                {
-                                    if (curBattery < 1000)
-                                    {
-                                        curBattery += 50;
-                                    }
-                                }
-                                else
-                                {
-                                    if (curBattery < 2000)
-                                    {
-                                        curBattery += 50;
-                                    }
+                            else{
+                                if (batteryUpgraded == false){
+                                    if (curBattery < 1000){curBattery += 50;}
+                                }else{
+                                    if (curBattery < 2000){curBattery += 50;}
                                 }
                                 enemyActivea = false;
-                                enemyBulletU.Top = enemyBulletU.Top - 1000;
-                                enemyBulletD.Top = enemyBulletD.Top - 1000;
-                                enemyBulletL.Left = enemyBulletL.Top - 1000;
-                                enemyBulletR.Left = enemyBulletR.Top - 1500;
+                                enemyBulletU.Top = enemyBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top - 1000;
+                                enemyBulletL.Left = enemyBulletL.Top - 1000; enemyBulletR.Left = enemyBulletR.Top - 1500;
                             }
                         }
                         //enemyBulletL2
-                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 5)
-                        {
-                            playerBulletU.Top = playerBulletU.Top - 1000;
-                            enemyBulletR2.Left = enemyBulletR2.Left + 1000;
+                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 5){
+                            playerBulletU.Top = playerBulletU.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Left + 1000;
                         }
                         //enemyBulletR2
-                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 6)
-                        {
-                            playerBulletU.Top = playerBulletU.Top - 1000;
-                            enemyBulletL2.Left = enemyBulletL2.Left + 1000;
+                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 6){
+                            playerBulletU.Top = playerBulletU.Top - 1000; enemyBulletL2.Left = enemyBulletL2.Left + 1000;
                         }
                         //enemyDeliverer
-                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 7)
-                        {
+                        else if (bulletCollision(playerBulletU.Left, playerBulletU.Right, playerBulletU.Top - 6, playerBulletU.Bottom) == 7){
                             playerBulletU.Top = playerBulletU.Top - 1000;
                             //Destroyed in two shots without an upgrade
-                            if (bulletsUpgraded == false)
-                            {
-                                if (enemyDamagedB == true)
-                                {
-                                    if (batteryUpgraded == false)
-                                    {
-                                        if (curBattery < 1000)
-                                        {
-                                            curBattery += 50;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (curBattery < 2000)
-                                        {
-                                            curBattery += 50;
-                                        }
+                            if (bulletsUpgraded == false){
+                                if (enemyDamagedB == true){
+                                    if (batteryUpgraded == false){
+                                        if (curBattery < 1000){curBattery += 50;}
+                                    } else{
+                                        if (curBattery < 2000){curBattery += 50;}
                                     }
                                     enemyActiveb = false;
-                                    enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-                                    enemyBulletR2.Left = enemyBulletR2.Top - 1500;
+                                    enemyBulletL2.Left = enemyBulletL2.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Top - 1500;
                                     curCash += 25;
                                     dayPts[curDay - 1] += 50;
                                     cashEarned[curDay - 1] += 25;
                                     lblCash.Text = "CASH: " + curCash;
-                                }
-                                else
-                                {
-                                    enemyDamagedB = true;
-                                }
+                                }else{enemyDamagedB = true;}
                             }
                             //Destroyed in one shot with an upgrade
-                            else
-                            {
-                                if (batteryUpgraded == false)
-                                {
-                                    if (curBattery < 1000)
-                                    {
-                                        curBattery += 50;
-                                    }
-                                }
-                                else
-                                {
-                                    if (curBattery < 2000)
-                                    {
-                                        curBattery += 50;
-                                    }
+                            else{
+                                if (batteryUpgraded == false){
+                                    if (curBattery < 1000){curBattery += 50;}
+                                }else{
+                                    if (curBattery < 2000){curBattery += 50;}
                                 }
                                 enemyActiveb = false;
-                                enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-                                enemyBulletR2.Left = enemyBulletR2.Top - 1500;
+                                enemyBulletL2.Left = enemyBulletL2.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Top - 1500;
                                 curCash += 25;
                                 dayPts[curDay - 1] += 50;
                                 cashEarned[curDay - 1] += 25;
@@ -983,170 +906,95 @@ namespace droneDeliveryExtreme
                     }
                 }
                 //Player shooting down
-                if (playerShootDown == true)
-                {
+                if (playerShootDown == true){
                     playerBulletD.Top = playerBulletD.Top + 10;
-
                     //Bullet dissapearing allowing for another shot
-                    if (playerBulletD.Top > 1000)
-                    {
-                        playerShoot = false;
-                        playerShootDown = false;
+                    if (playerBulletD.Top > 1000){
+                        playerShoot = false; playerShootDown = false;
                     }
-
                     //Detecting what object the bullet has collided with
-                    else if (enemyCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6))
-                    {
+                    else if (enemyCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6)){
                         //enemyBulletU
-                        if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 0)
-                        {
+                        if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 0){
                             playerBulletD.Top = playerBulletD.Top + 1000;
                             enemyBulletU.Top = enemyBulletU.Top - 1000;
                         }
                         //enemyBulletD
-                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 1)
-                        {
-                            playerBulletD.Top = playerBulletD.Top + 1000;
-                            enemyBulletD.Top = enemyBulletD.Top + 1000;
+                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 1){
+                            playerBulletD.Top = playerBulletD.Top + 1000; enemyBulletD.Top = enemyBulletD.Top + 1000;
                         }
                         //enemyBulletL
-                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 2)
-                        {
-                            playerBulletD.Top = playerBulletD.Top + 1000;
-                            enemyBulletL.Left = enemyBulletL.Left - 1000;
+                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 2){
+                            playerBulletD.Top = playerBulletD.Top + 1000; enemyBulletL.Left = enemyBulletL.Left - 1000;
                         }
                         //enemybulletR
-                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 3)
-                        {
-                            playerBulletD.Top = playerBulletD.Top + 1000;
-                            enemyBulletR.Left = enemyBulletR.Left + 1000;
+                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 3){
+                            playerBulletD.Top = playerBulletD.Top + 1000; enemyBulletR.Left = enemyBulletR.Left + 1000;
                         }
                         //enemyDrone
-                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 4)
-                        {
+                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 4){
                             playerBulletD.Top = playerBulletD.Top + 1000;
                             //Destroyed in two shots without an upgrade
-                            if (bulletsUpgraded == false)
-                            {
-                                if (enemyDamaged == true)
-                                {
-                                    if (batteryUpgraded == false)
-                                    {
-                                        if (curBattery < 1000)
-                                        {
-                                            curBattery += 50;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (curBattery < 2000)
-                                        {
-                                            curBattery += 50;
-                                        }
+                            if (bulletsUpgraded == false){
+                                if (enemyDamaged == true){
+                                    if (batteryUpgraded == false){
+                                        if (curBattery < 1000){curBattery += 50;}
+                                    }else{
+                                        if (curBattery < 2000){curBattery += 50;}
                                     }
                                     enemyActivea = false;
-                                    enemyBulletU.Top = enemyBulletU.Top - 1000;
-                                    enemyBulletD.Top = enemyBulletD.Top - 1000;
-                                    enemyBulletL.Left = enemyBulletL.Top - 1000;
-                                    enemyBulletR.Left = enemyBulletR.Top - 1500;
-                                }
-                                else
-                                {
-                                    enemyDamaged = true;
-                                }
+                                    enemyBulletU.Top = enemyBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top - 1000;
+                                    enemyBulletL.Left = enemyBulletL.Top - 1000; enemyBulletR.Left = enemyBulletR.Top - 1500;
+                                }else{enemyDamaged = true;}
                             }
                             //Destroyed in one shot with an upgrade
-                            else
-                            {
-                                if (batteryUpgraded == false)
-                                {
-                                    if (curBattery < 1000)
-                                    {
-                                        curBattery += 50;
-                                    }
-                                }
-                                else
-                                {
-                                    if (curBattery < 2000)
-                                    {
-                                        curBattery += 50;
-                                    }
+                            else{
+                                if (batteryUpgraded == false){
+                                    if (curBattery < 1000){curBattery += 50;}
+                                }else{
+                                    if (curBattery < 2000){curBattery += 50;}
                                 }
                                 enemyActivea = false;
-                                enemyBulletU.Top = enemyBulletU.Top - 1000;
-                                enemyBulletD.Top = enemyBulletD.Top - 1000;
-                                enemyBulletL.Left = enemyBulletL.Top - 1000;
-                                enemyBulletR.Left = enemyBulletR.Top - 1500;
+                                enemyBulletU.Top = enemyBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top - 1000;
+                                enemyBulletL.Left = enemyBulletL.Top - 1000; enemyBulletR.Left = enemyBulletR.Top - 1500;
                             }
                         }
                         //enemyBulletL2
-                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 5)
-                        {
-                            playerBulletD.Top = playerBulletD.Top + 1000;
-                            enemyBulletR2.Left = enemyBulletR2.Left + 1000;
+                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 5){
+                            playerBulletD.Top = playerBulletD.Top + 1000; enemyBulletR2.Left = enemyBulletR2.Left + 1000;
                         }
                         //enemyBulletR2
-                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 6)
-                        {
-                            playerBulletD.Top = playerBulletD.Top + 1000;
-                            enemyBulletL2.Left = enemyBulletL2.Left + 1000;
+                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 6){
+                            playerBulletD.Top = playerBulletD.Top + 1000; enemyBulletL2.Left = enemyBulletL2.Left + 1000;
                         }
                         //enemyDeliverer
-                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 7)
-                        {
+                        else if (bulletCollision(playerBulletD.Left, playerBulletD.Right, playerBulletD.Top, playerBulletD.Bottom + 6) == 7){
                             playerBulletD.Top = playerBulletD.Top + 1000;
                             //Destroyed in two shots without an upgrade
-                            if (bulletsUpgraded == false)
-                            {
-                                if (enemyDamagedB == true)
-                                {
-                                    if (batteryUpgraded == false)
-                                    {
-                                        if (curBattery < 1000)
-                                        {
-                                            curBattery += 50;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (curBattery < 2000)
-                                        {
-                                            curBattery += 50;
-                                        }
+                            if (bulletsUpgraded == false){
+                                if (enemyDamagedB == true){
+                                    if (batteryUpgraded == false){
+                                        if (curBattery < 1000){curBattery += 50;}
+                                    }else{
+                                        if (curBattery < 2000){curBattery += 50;}
                                     }
                                     enemyActiveb = false;
-                                    enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-                                    enemyBulletR2.Left = enemyBulletR2.Top - 1500;
+                                    enemyBulletL2.Left = enemyBulletL2.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Top - 1500;
                                     curCash += 25;
                                     dayPts[curDay - 1] += 50;
                                     cashEarned[curDay - 1] += 25;
                                     lblCash.Text = "CASH: " + curCash;
-                                }
-                                else
-                                {
-                                    enemyDamagedB = true;
-                                }
+                                }else{enemyDamagedB = true;}
                             }
                             //Destroyed in one shot with an upgrade
-                            else
-                            {
-                                if (batteryUpgraded == false)
-                                    {
-                                        if (curBattery < 1000)
-                                        {
-                                            curBattery += 50;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (curBattery < 2000)
-                                        {
-                                            curBattery += 50;
-                                        }
+                            else{
+                                if (batteryUpgraded == false){
+                                        if (curBattery < 1000){curBattery += 50;}
+                                    }else{
+                                        if (curBattery < 2000){curBattery += 50;}
                                     }
                                 enemyActiveb = false;
-                                enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-                                enemyBulletR2.Left = enemyBulletR2.Top - 1500;
+                                enemyBulletL2.Left = enemyBulletL2.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Top - 1500;
                                 curCash += 25;
                                 dayPts[curDay - 1] += 50;
                                 cashEarned[curDay - 1] += 25;
@@ -1156,169 +1004,94 @@ namespace droneDeliveryExtreme
                     }
                 }
                 //Player shooting left
-                if (playerShootLeft == true)
-                {
+                if (playerShootLeft == true){
                     playerBulletL.Left = playerBulletL.Left - 10;
-
                     //Bullet dissapearing allowing for another shot
-                    if (playerBulletL.Right < 0)
-                    {
-                        playerShoot = false;
-                        playerShootLeft = false;
+                    if (playerBulletL.Right < 0){
+                        playerShoot = false; playerShootLeft = false;
                     }
                     //Detecting what object the bullet has collided with
-                    else if (enemyCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom))
-                    {
+                    else if (enemyCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom)){
                         //enemyBulletU
-                        if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 0)
-                        {
-                            playerBulletL.Left = playerBulletL.Left - 1000;
-                            enemyBulletU.Top = enemyBulletU.Top - 1000;
+                        if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 0){
+                            playerBulletL.Left = playerBulletL.Left - 1000; enemyBulletU.Top = enemyBulletU.Top - 1000;
                         }
                         //enemyBulletD
-                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 1)
-                        {
-                            playerBulletL.Left = playerBulletL.Left - 1000;
-                            enemyBulletD.Top = enemyBulletD.Top + 1000;
+                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 1){
+                            playerBulletL.Left = playerBulletL.Left - 1000; enemyBulletD.Top = enemyBulletD.Top + 1000;
                         }
                         //enemyBulletL
-                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 2)
-                        {
-                            playerBulletL.Left = playerBulletL.Left - 1000;
-                            enemyBulletL.Left = enemyBulletL.Left - 1000;
+                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 2){
+                            playerBulletL.Left = playerBulletL.Left - 1000; enemyBulletL.Left = enemyBulletL.Left - 1000;
                         }
                         //enemyBulletR
-                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 3)
-                        {
-                            playerBulletL.Left = playerBulletL.Left - 1000;
-                            enemyBulletR.Left = enemyBulletR.Left + 1000;
+                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 3){
+                            playerBulletL.Left = playerBulletL.Left - 1000; enemyBulletR.Left = enemyBulletR.Left + 1000;
                         }
                         //enemyDrone
-                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 4)
-                        {
+                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 4){
                             playerBulletL.Left = playerBulletL.Left - 1000;
                             //Destroyed in two shots without an upgrade
-                            if (bulletsUpgraded == false)
-                            {
-                                if (enemyDamaged == true)
-                                {
-                                    if (batteryUpgraded == false)
-                                    {
-                                        if (curBattery < 1000)
-                                        {
-                                            curBattery += 50;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (curBattery < 2000)
-                                        {
-                                            curBattery += 50;
-                                        }
+                            if (bulletsUpgraded == false){
+                                if (enemyDamaged == true){
+                                    if (batteryUpgraded == false){
+                                        if (curBattery < 1000){curBattery += 50;}
+                                    }else{
+                                        if (curBattery < 2000){curBattery += 50;}
                                     }
                                     enemyActivea = false;
-                                    enemyBulletU.Top = enemyBulletU.Top - 1000;
-                                    enemyBulletD.Top = enemyBulletD.Top - 1000;
-                                    enemyBulletL.Left = enemyBulletL.Top - 1000;
-                                    enemyBulletR.Left = enemyBulletR.Top - 1500;
-                                }
-                                else
-                                {
-                                    enemyDamaged = true;
-                                }
+                                    enemyBulletU.Top = enemyBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top - 1000;
+                                    enemyBulletL.Left = enemyBulletL.Top - 1000; enemyBulletR.Left = enemyBulletR.Top - 1500;
+                                }else{enemyDamaged = true;}
                             }
                             //Destroyed in one shot with an upgrade
-                            else
-                            {
-                                if (batteryUpgraded == false)
-                                {
-                                    if (curBattery < 1000)
-                                    {
-                                        curBattery += 50;
-                                    }
-                                }
-                                else
-                                {
-                                    if (curBattery < 2000)
-                                    {
-                                        curBattery += 50;
-                                    }
+                            else{
+                                if (batteryUpgraded == false){
+                                    if (curBattery < 1000){curBattery += 50;}
+                                }else{
+                                    if (curBattery < 2000){curBattery += 50;}
                                 }
                                 enemyActivea = false;
-                                enemyBulletU.Top = enemyBulletU.Top - 1000;
-                                enemyBulletD.Top = enemyBulletD.Top - 1000;
-                                enemyBulletL.Left = enemyBulletL.Top - 1000;
-                                enemyBulletR.Left = enemyBulletR.Top - 1500;
+                                enemyBulletU.Top = enemyBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top - 1000;
+                                enemyBulletL.Left = enemyBulletL.Top - 1000; enemyBulletR.Left = enemyBulletR.Top - 1500;
                             }
                         }
                         //enemyBulletL2
-                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 5)
-                        {
-                            playerBulletL.Left = playerBulletL.Left - 1000;
-                            enemyBulletL2.Left = enemyBulletL2.Left - 1000;
+                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 5){
+                            playerBulletL.Left = playerBulletL.Left - 1000; enemyBulletL2.Left = enemyBulletL2.Left - 1000;
                         }
                         //enemyBulletR2
-                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 6)
-                        {
-                            playerBulletL.Left = playerBulletL.Left - 1000;
-                            enemyBulletR2.Left = enemyBulletR2.Left + 1000;
+                        else if (bulletCollision(playerBulletL.Left - 6, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom) == 6){
+                            playerBulletL.Left = playerBulletL.Left - 1000; enemyBulletR2.Left = enemyBulletR2.Left + 1000;
                         }
                         //enemyDeliverer
-                        else if (bulletCollision(playerBulletL.Left, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom + 6) == 7)
-                        {
+                        else if (bulletCollision(playerBulletL.Left, playerBulletL.Right, playerBulletL.Top, playerBulletL.Bottom + 6) == 7){
                             playerBulletL.Left = playerBulletL.Left - 1000;
                             //Destroyed in two shots without an upgrade
-                            if (bulletsUpgraded == false)
-                            {
-                                if (enemyDamagedB == true)
-                                {
-                                    if (batteryUpgraded == false)
-                                    {
-                                        if (curBattery < 1000)
-                                        {
-                                            curBattery += 50;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (curBattery < 2000)
-                                        {
-                                            curBattery += 50;
-                                        }
+                            if (bulletsUpgraded == false){
+                                if (enemyDamagedB == true){
+                                    if (batteryUpgraded == false){
+                                        if (curBattery < 1000){curBattery += 50;}
+                                    }else{
+                                        if (curBattery < 2000){curBattery += 50;}
                                     }
                                     enemyActiveb = false;
-                                    enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-                                    enemyBulletR2.Left = enemyBulletR2.Top - 1500;
+                                    enemyBulletL2.Left = enemyBulletL2.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Top - 1500;
                                     curCash += 25;
                                     dayPts[curDay - 1] += 50;
                                     cashEarned[curDay - 1] += 25;
                                     lblCash.Text = "CASH: " + curCash;
-                                }
-                                else
-                                {
-                                    enemyDamagedB = true;
-                                }
+                                }else{enemyDamagedB = true;}
                             }
                             //Destroyed in one shot with an upgrade
-                            else
-                            {
-                                if (batteryUpgraded == false)
-                                {
-                                    if (curBattery < 1000)
-                                    {
-                                        curBattery += 50;
-                                    }
-                                }
-                                else
-                                {
-                                    if (curBattery < 2000)
-                                    {
-                                        curBattery += 50;
-                                    }
+                            else{
+                                if (batteryUpgraded == false){
+                                    if (curBattery < 1000){curBattery += 50;}
+                                }else{
+                                    if (curBattery < 2000){curBattery += 50;}
                                 }
                                 enemyActiveb = false;
-                                enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-                                enemyBulletR2.Left = enemyBulletR2.Top - 1500;
+                                enemyBulletL2.Left = enemyBulletL2.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Top - 1500;
                                 curCash += 25;
                                 dayPts[curDay - 1] += 50;
                                 cashEarned[curDay - 1] += 25;
@@ -1328,177 +1101,100 @@ namespace droneDeliveryExtreme
                     }
                 }
                 //Player shooting right
-                if (playerShootRight == true)
-                {
+                if (playerShootRight == true){
                     playerBulletR.Left = playerBulletR.Left + 10;
-
                     //Bullet dissapearing allowing for another shot
-                    if (playerBulletR.Right > 1500)
-                    {
-                        playerShoot = false;
-                        playerShootRight = false;
+                    if (playerBulletR.Right > 1500){
+                        playerShoot = false; playerShootRight = false;
                     }
-
                     //Detecting what object the bullet has collided with
-                    else if (enemyCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom))
-                    {
+                    else if (enemyCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom)){
                         //enemyBulletU
-                        if (bulletCollision(playerBulletR.Left, playerBulletL.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 0)
-                        {
-                            playerBulletR.Left = playerBulletR.Left + 1000;
-                            enemyBulletU.Top = enemyBulletU.Top - 1000;
+                        if (bulletCollision(playerBulletR.Left, playerBulletL.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 0){
+                            playerBulletR.Left = playerBulletR.Left + 1000; enemyBulletU.Top = enemyBulletU.Top - 1000;
                         }
                         //enemyBulletD
-                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 1)
-                        {
-                            playerBulletR.Left = playerBulletR.Left + 1000;
-                            enemyBulletD.Top = enemyBulletD.Top + 1000;
+                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 1){
+                            playerBulletR.Left = playerBulletR.Left + 1000; enemyBulletD.Top = enemyBulletD.Top + 1000;
                         }
                         //enemyBulletL
-                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 2)
-                        {
-                            playerBulletR.Left = playerBulletR.Left + 1000;
-                            enemyBulletL.Left = enemyBulletL.Left - 1000;
+                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 2){
+                            playerBulletR.Left = playerBulletR.Left + 1000; enemyBulletL.Left = enemyBulletL.Left - 1000;
                         }
                         //enemyBulletR
-                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 3)
-                        {
-                            playerBulletR.Left = playerBulletR.Left + 1000;
-                            enemyBulletR.Left = enemyBulletR.Left + 1000;
+                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 3){
+                            playerBulletR.Left = playerBulletR.Left + 1000; enemyBulletR.Left = enemyBulletR.Left + 1000;
                         }
                         //enemyDrone
-                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 4)
-                        {
+                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 4){
                             playerBulletR.Left = playerBulletR.Left + 1000;
                             //Destroyed in two shots without an upgrade
-                            if (bulletsUpgraded == false)
-                            {
-                                if (enemyDamaged == true)
-                                {
+                            if (bulletsUpgraded == false){
+                                if (enemyDamaged == true){
                                     enemyActivea = false;
-                                    enemyBulletU.Top = enemyBulletU.Top - 1000;
-                                    enemyBulletD.Top = enemyBulletD.Top - 1000;
-                                    enemyBulletL.Left = enemyBulletL.Top - 1000;
-                                    enemyBulletR.Left = enemyBulletR.Top - 1500;
-                                    if (batteryUpgraded == false)
-                                    {
-                                        if (curBattery < 1000)
-                                        {
-                                            curBattery += 50;
-                                        }
+                                    enemyBulletU.Top = enemyBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top - 1000;
+                                    enemyBulletL.Left = enemyBulletL.Top - 1000; enemyBulletR.Left = enemyBulletR.Top - 1500;
+                                    if (batteryUpgraded == false){
+                                        if (curBattery < 1000){curBattery += 50;}
+                                    }else{
+                                        if (curBattery < 2000){curBattery += 50;}
                                     }
-                                    else
-                                    {
-                                        if (curBattery < 2000)
-                                        {
-                                            curBattery += 50;
-                                        }
-                                    }
-                                }
-
-                                else
-                                {
-                                    enemyDamaged = true;
-                                }
+                                }else{enemyDamaged = true;}
                             }
                             //Destroyed in one shot with an upgrade
-                            else
-                            {
+                            else{
                                 enemyActivea = false;
-                                enemyBulletU.Top = enemyBulletU.Top - 1000;
-                                enemyBulletD.Top = enemyBulletD.Top - 1000;
-                                enemyBulletL.Left = enemyBulletL.Top - 1000;
-                                enemyBulletR.Left = enemyBulletR.Top - 1500;
-                                if (batteryUpgraded == false)
-                                {
-                                    if (curBattery < 1000)
-                                    {
-                                        curBattery += 50;
-                                    }
-                                }
-                                else
-                                {
-                                    if (curBattery < 2000)
-                                    {
-                                        curBattery += 50;
-                                    }
+                                enemyBulletU.Top = enemyBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top - 1000;
+                                enemyBulletL.Left = enemyBulletL.Top - 1000; enemyBulletR.Left = enemyBulletR.Top - 1500;
+                                if (batteryUpgraded == false){
+                                    if (curBattery < 1000){curBattery += 50;}
+                                }else{
+                                    if (curBattery < 2000){curBattery += 50;}
                                 }
                             }    
                         }
                         //enemyBulletL2
-                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 5)
-                        {
-                            playerBulletR.Left = playerBulletR.Left + 1000;
-                            enemyBulletL2.Left = enemyBulletL2.Left - 1000;
+                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 5){
+                            playerBulletR.Left = playerBulletR.Left + 1000; enemyBulletL2.Left = enemyBulletL2.Left - 1000;
                         }
                         //enemyBulletR2
-                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 6)
-                        {
-                            playerBulletR.Left = playerBulletR.Left + 1000;
-                            enemyBulletR2.Left = enemyBulletR2.Left + 1000;
+                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 6){
+                            playerBulletR.Left = playerBulletR.Left + 1000; enemyBulletR2.Left = enemyBulletR2.Left + 1000;
                         }
                         //enemyDeliverer
-                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 7)
-                        {
+                        else if (bulletCollision(playerBulletR.Left, playerBulletR.Right + 6, playerBulletR.Top, playerBulletR.Bottom) == 7){
                             playerBulletR.Left = playerBulletR.Left + 1000;
                             //Destroyed in two shots without an upgrade
-                            if (bulletsUpgraded == false)
-                            {
-                                if (enemyDamagedB == true)
-                                {
-                                    if (batteryUpgraded == false)
-                                    {
-                                        if (curBattery < 1000)
-                                        {
-                                            curBattery += 50;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (curBattery < 2000)
-                                        {
-                                            curBattery += 50;
-                                        }
+                            if (bulletsUpgraded == false){
+                                if (enemyDamagedB == true){
+                                    if (batteryUpgraded == false){
+                                        if (curBattery < 1000){curBattery += 50;}
+                                    }else{
+                                        if (curBattery < 2000){curBattery += 50;}
                                     }
                                     curCash += 25;
                                     dayPts[curDay - 1] += 50;
                                     cashEarned[curDay - 1] += 25;
                                     enemyActiveb = false;
-                                    enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-                                    enemyBulletR2.Left = enemyBulletR2.Top - 1500;
+                                    enemyBulletL2.Left = enemyBulletL2.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Top - 1500;
                                     curCash += 25;
                                     dayPts[curDay - 1] += 50;
                                     cashEarned[curDay - 1] += 25;
                                     lblCash.Text = "CASH: " + curCash;
-                                }
-                                else
-                                {
-                                    enemyDamagedB = true;
-                                }
+                                }else{enemyDamagedB = true;}
                             }
                             //Destroyed in one shot with an upgrade
-                            else
-                            {
-                                if (batteryUpgraded == false)
-                                {
-                                    if (curBattery < 1000)
-                                    {
-                                        curBattery += 50;
-                                    }
-                                }
-                                else
-                                {
-                                    if (curBattery < 2000)
-                                    {
-                                        curBattery += 50;
-                                    }
+                            else{
+                                if (batteryUpgraded == false){
+                                    if (curBattery < 1000){curBattery += 50;}
+                                }else{
+                                    if (curBattery < 2000){curBattery += 50;}
                                 }
                                 curCash += 25;
                                 dayPts[curDay - 1] += 50;
                                 cashEarned[curDay - 1] += 25;
                                 enemyActiveb = false;
-                                enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-                                enemyBulletR2.Left = enemyBulletR2.Top - 1500;
+                                enemyBulletL2.Left = enemyBulletL2.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Top - 1500;
                                 curCash += 25;
                                 dayPts[curDay - 1] += 50;
                                 cashEarned[curDay - 1] += 25;
@@ -1509,110 +1205,77 @@ namespace droneDeliveryExtreme
                 }
             }
             //enemy shooting in the players direction while active
-            if (enemyActivea == true)
-            {
-                if (enemyShoot == true)
-                {
+            if (enemyActivea == true){
+                if (enemyShoot == true){
                     //enemy shoot up
-                    if (enemyShootUp == true)
-                    {
+                    if (enemyShootUp == true){
                         enemyBulletU.Top = enemyBulletU.Top - 5;
-                        if (enemyBulletU.Bottom < 0)
-                        {
-                            enemyShoot = false;
-                            enemyShootUp = false;
+                        if (enemyBulletU.Bottom < 0){
+                            enemyShoot = false; enemyShootUp = false;
                         }
                     }
                     //enemy shoot down
-                    if (enemyShootDown == true)
-                    {
+                    if (enemyShootDown == true){
                         enemyBulletD.Top = enemyBulletD.Top + 5;
-                        if (enemyBulletD.Top > 1000)
-                        {
-                            enemyShoot = false;
-                            enemyShootDown = false;
+                        if (enemyBulletD.Top > 1000){
+                            enemyShoot = false; enemyShootDown = false;
                         }
                     }
                     //enemy shoot left
-                    if (enemyShootLeft == true)
-                    {
+                    if (enemyShootLeft == true){
                         enemyBulletL.Left = enemyBulletL.Left - 5;
-                        if (enemyBulletL.Right < 0)
-                        {
-                            enemyShoot = false;
-                            enemyShootLeft = false;
+                        if (enemyBulletL.Right < 0){
+                            enemyShoot = false; enemyShootLeft = false;
                         }
                     }
                     //enemy shoot right
-                    if (enemyShootRight == true)
-                    {
+                    if (enemyShootRight == true){
                         enemyBulletR.Left = enemyBulletR.Left + 5;
-                        if (enemyBulletR.Right > 1200)
-                        {
-                            enemyShoot = false;
-                            enemyShootRight = false;
+                        if (enemyBulletR.Right > 1200){
+                            enemyShoot = false; enemyShootRight = false;
                         }
                     }
                 }
             }
             //bonus enemy shooting in the players direction while active
-            if (enemyActiveb == true)
-            {
-                if (enemyShootB == true)
-                {
+            if (enemyActiveb == true){
+                if (enemyShootB == true){
                     //bonus enemy shoot left
-                    if (enemyShootLeftB == true)
-                    {
+                    if (enemyShootLeftB == true){
                         enemyBulletL2.Left = enemyBulletL2.Left - 5;
-                        if (enemyBulletL2.Right < 0)
-                        {
-                            enemyShootB = false;
-                            enemyShootLeftB = false;
+                        if (enemyBulletL2.Right < 0){
+                            enemyShootB = false; enemyShootLeftB = false;
                         }
                     }
                     //bonus enemy shoot right
-                    if (enemyShootRightB == true)
-                    {
+                    if (enemyShootRightB == true){
                         enemyBulletR2.Left = enemyBulletR2.Left + 5;
-                        if (enemyBulletR2.Right > 1200)
-                        {
-                            enemyShootB = false;
-                            enemyShootRightB = false;
+                        if (enemyBulletR2.Right > 1200){
+                            enemyShootB = false; enemyShootRightB = false;
                         }
                     }
                 }
             }
 
             //house shoot furniture if angry
-            if (houseShoot == true)
-            {
+            if (houseShoot == true){
                 thrownFurniture.Top = thrownFurniture.Top - 25;
-                if (thrownFurniture.Bottom < 0)
-                {
-                    houseShoot = false;
-                }
+                if (thrownFurniture.Bottom < 0){houseShoot = false;}
                 //Being hit by the furniture end the day immeditatley 
-                else if (playerCollision(thrownFurniture.Left, thrownFurniture.Right, thrownFurniture.Top - 6, thrownFurniture.Bottom) == true)
-                {
-                    houseShoot = false;
-                    thrownFurniture.Left -= 1000;
+                else if (playerCollision(thrownFurniture.Left, thrownFurniture.Right, thrownFurniture.Top - 6, thrownFurniture.Bottom) == true){
+                    houseShoot = false; thrownFurniture.Left -= 1000;
                     endDay();
                 }
                 //if an enemy is hit they are destroyed instantly
-                else if (bulletCollision(thrownFurniture.Left, thrownFurniture.Right, thrownFurniture.Top - 6, thrownFurniture.Bottom) == 4)
-                {
+                else if (bulletCollision(thrownFurniture.Left, thrownFurniture.Right, thrownFurniture.Top - 6, thrownFurniture.Bottom) == 4){
                     enemyActivea = false;
-                    enemyBulletU.Top = enemyBulletU.Top - 1000;
-                    enemyBulletD.Top = enemyBulletD.Top - 1000;
-                    enemyBulletL.Left = enemyBulletL.Top - 1000;
-                    enemyBulletR.Left = enemyBulletR.Top - 1500;
+                    enemyBulletU.Top = enemyBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top - 1000;
+                    enemyBulletL.Left = enemyBulletL.Top - 1000; enemyBulletR.Left = enemyBulletR.Top - 1500;
                 }
                 //if a bonus enemy is hit they are also destroyed instantly
-                else if (bulletCollision(thrownFurniture.Left, thrownFurniture.Right, thrownFurniture.Top - 6, thrownFurniture.Bottom) == 7)
-                {
+                else if (bulletCollision(thrownFurniture.Left, thrownFurniture.Right, thrownFurniture.Top - 6, thrownFurniture.Bottom) == 7){
                     enemyActiveb = false;
-                    enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-                    enemyBulletR2.Left = enemyBulletR2.Top - 1500;
+                    enemyBulletL2.Left = enemyBulletL2.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Top - 1500;
                     curCash += 25;
                     dayPts[curDay - 1] += 50;
                     cashEarned[curDay - 1] += 25;
