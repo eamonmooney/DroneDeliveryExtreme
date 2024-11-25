@@ -645,117 +645,57 @@ namespace droneDeliveryExtreme
         }
 
         //Responsible for making the parcel, the player, and enemies fall 
-        private void fallTimer_Tick(object sender, EventArgs e)
-        {
+        private void fallTimer_Tick(object sender, EventArgs e){
             //Parcel falling physics
-            if ((parcelFall == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom+12)))
-            {
+            if ((parcelFall == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom+12))){
                 playerParcel.Top = playerParcel.Top + fallSpeed;
                 fallCount++;
-
-                if (fallCount == 10)
-                {
-                    fallSpeed = fallSpeed * 2;
-                }
-                if (fallCount > 10)
-                {
-                    fallCount = 1;
-                }
+                if (fallCount == 10){fallSpeed = fallSpeed * 2;}
+                if (fallCount > 10){fallCount = 1;}
             }
-
             //Player falling physics
-            if (droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom + 6))
-            {
+            if (droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom + 6)){
                 parcelFall = false;
-                fallSpeed = 1;
-                fallCount = 1;
+                fallSpeed = 1; fallCount = 1;
             }
-
-            if (curBattery == 0)
-            {
+            if (curBattery == 0){
                 playerDrone.Top = playerDrone.Top + playerFallSpeed;
                 playerFallCount++;
-
-                if (playerFallCount == 10)
-                {
-                    playerFallSpeed = playerFallSpeed * 2;
-                }
-                if (playerFallCount > 10)
-                {
-                    playerFallCount = 1;
-                }
+                if (playerFallCount == 10){playerFallSpeed = playerFallSpeed * 2;}
+                if (playerFallCount > 10){playerFallCount = 1;}
             }
-
             //Enemy drone falling physics
-            if (enemyActivea == false)
-            {
+            if (enemyActivea == false){
                 enemyDrone.Top = enemyDrone.Top + enemyFallSpeed;
                 enemyFallCount++;
-
-                if (enemyFallCount == 10)
-                {
-                    enemyFallSpeed = enemyFallSpeed * 2;
-                }
-                if (enemyFallCount > 10)
-                {
-                    enemyFallCount = 1;
-                }
+                if (enemyFallCount == 10){enemyFallSpeed = enemyFallSpeed * 2;}
+                if (enemyFallCount > 10){enemyFallCount = 1;}
             }
-
             //Deliverer drone falling physics
-            if (enemyActiveb == false)
-            {
+            if (enemyActiveb == false){
                 enemyDeliverer.Top = enemyDeliverer.Top + enemyFallSpeedB;
                 enemyFallCountB++;
-
-                if (enemyFallCountB == 10)
-                {
-                    enemyFallSpeedB = enemyFallSpeedB * 2;
-                }
-                if (enemyFallCountB > 10)
-                {
-                    enemyFallCountB = 1;
-                }
+                if (enemyFallCountB == 10){enemyFallSpeedB = enemyFallSpeedB * 2;}
+                if (enemyFallCountB > 10){enemyFallCountB = 1;}
             }
         }
-
         //Responsible for counting down and updating lblTime with the current time, also responsible for the players battery drain
-        private void timeTimer_Tick(object sender, EventArgs e)
-        {
+        private void timeTimer_Tick(object sender, EventArgs e){
             timeRemaining--;
             lblTime.Text = "TIME: " + timeRemaining / 60 + ":" + (timeRemaining % 60).ToString("00");
-
             //When the time runs out, the day is over
-            if (timeRemaining == 0)
-            {
-                endDay();
-            }    
-
-            if (deadDrone == false)
-            {
-                if (batteryUpgraded == false)
-                {
+            if (timeRemaining == 0){endDay();}    
+            if (deadDrone == false){
+                if (batteryUpgraded == false){
                     //Gain battery when at the post office, lose battery when not
-                    if (goodOfficeCollision(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) && curBattery < 1000 && curRoad == 1)
-                    {
+                    if (goodOfficeCollision(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) && curBattery < 1000 && curRoad == 1){
                         curBattery = curBattery + 20;
-                    }
-                    else
-                    {
-                        curBattery = curBattery - 4;
-                    }
-                }
-                else
-                {
+                    }else{curBattery = curBattery - 4;}
+                }else{
                     //Gain battery when at the post office, lose battery when not
-                    if (goodOfficeCollision(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) && curBattery < 2000 && curRoad == 1)
-                    {
+                    if (goodOfficeCollision(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) && curBattery < 2000 && curRoad == 1){
                         curBattery = curBattery + 20;
-                    }
-                    else
-                    {
-                        curBattery = curBattery - 4;
-                    }
+                    }else{curBattery = curBattery - 4;}
                 }
             }
         }
