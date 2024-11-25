@@ -783,51 +783,26 @@ namespace droneDeliveryExtreme
         }
 
         //Sets the houses that need deliveries for the game and the intensity of the wind for each day
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            for (int x = 0; x < 5; x++)
-            {
-
+        private void Form1_Load(object sender, EventArgs e){
+            for (int x = 0; x < 5; x++){
                 //Allows for the random selcted houses to not have the same result twice in a day, meaning all deliveries will be different
                 HashSet<int> usedNumbers = new HashSet<int>();
-
-                for (int y = 0; y < 5; y++)
-                {
+                for (int y = 0; y < 5; y++){
                     //Random number that is assigned to what houses have requested delivery for all of the days
                     int randomNumber;
-
-                    do
-                    {
-                        randomNumber = houseRng.Next(0, 6);
-                    }
+                    do{randomNumber = houseRng.Next(0, 6);}
                     while (usedNumbers.Contains(randomNumber));
-
                     houseCheck[x, y] = randomNumber;
                     houseName[x, y] = "House " + (randomNumber + 1);
                     usedNumbers.Add(randomNumber);
                 }
             }
-
             lblObjective.Text = "OBJECTIVE: Deliver to " + houseName[0, 0];
-
             //set values of what wind direction and intensity will be for each day
-            //1 = weak left
-            //2 = weak right
-            //3 = medium left
-            //4 = medium right
-            //5 = strong left
-            //6 = strong right
-
-            windDay[0] = 1;
-            windDay[1] = 2;
-            windDay[2] = 3;
-            windDay[3] = 4;
-            windDay[4] = 5;
-
+            //1 = weak left, 2 = weak right, 3 = medium left, 4 = medium right, 5 = strong left, 6 = strong right
+            windDay[0] = 1; windDay[1] = 2; windDay[2] = 3; windDay[3] = 4; windDay[4] = 5;
             //houses are temporarily removed as the game starts at the post office
-            house1.Left -= 2000;
-            house2.Left -= 2000;
-            house3.Left -= 2000;
+            house1.Left -= 2000; house2.Left -= 2000; house3.Left -= 2000;
         }
 
         //Responsible for the shooting of both the player and enemies, finding what the bullet has hit using collision
