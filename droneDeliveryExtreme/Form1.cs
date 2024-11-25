@@ -703,44 +703,15 @@ namespace droneDeliveryExtreme
         //Responsible for updating the battery icons to represent the current battery staus, ends the day if the battery reaches 0
         private void batteryTimer_Tick(object sender, EventArgs e)
         {
-            if (deadDrone == false)
-            {
-                if (curBattery > 1650)
-                {
-                    playerBattery1.Image = batteryPic1.Image;
-                    playerBattery2.Image = batteryPic1.Image;
-                }
-                else if ((curBattery < 1650) && !(curBattery < 1300))
-                {
-                    playerBattery1.Image = batteryPic1.Image;
-                    playerBattery2.Image = batteryPic2.Image;
-                }
-                else if ((curBattery < 1300) && !(curBattery < 1000))
-                {
-                    playerBattery1.Image = batteryPic1.Image;
-                    playerBattery2.Image = batteryPic3.Image;
-                }
-                else if ((curBattery < 1000) && !(curBattery < 650))
-                {
-                    playerBattery1.Image = batteryPic1.Image;
-                    playerBattery2.Image = batteryPic4.Image;
-                }
-                else if ((curBattery < 650) && !(curBattery < 300))
-                {
-                    playerBattery1.Image = batteryPic2.Image;
-                    playerBattery2.Image = batteryPic4.Image;
-                }
-                else if (curBattery < 300 && !(curBattery <= 0))
-                {
-                    playerBattery1.Image = batteryPic3.Image;
-                    playerBattery2.Image = batteryPic4.Image;
-                }
-                else if (curBattery <= 0)
-                {
-                    playerBattery1.Image = batteryPic4.Image;
-                    playerBattery2.Image = batteryPic4.Image;
+            if (deadDrone == false){
+                if (curBattery > 1650){playerBattery1.Image = batteryPic1.Image; playerBattery2.Image = batteryPic1.Image;}
+                else if ((curBattery < 1650) && !(curBattery < 1300)){playerBattery1.Image = batteryPic1.Image; playerBattery2.Image = batteryPic2.Image;}
+                else if ((curBattery < 1300) && !(curBattery < 1000)){playerBattery1.Image = batteryPic1.Image; playerBattery2.Image = batteryPic3.Image;}
+                else if ((curBattery < 1000) && !(curBattery < 650)){playerBattery1.Image = batteryPic1.Image; playerBattery2.Image = batteryPic4.Image;}
+                else if ((curBattery < 650) && !(curBattery < 300)){playerBattery1.Image = batteryPic2.Image; playerBattery2.Image = batteryPic4.Image;}
+                else if (curBattery < 300 && !(curBattery <= 0)){playerBattery1.Image = batteryPic3.Image; playerBattery2.Image = batteryPic4.Image;}
+                else if (curBattery <= 0){playerBattery1.Image = batteryPic4.Image; playerBattery2.Image = batteryPic4.Image;
                     deadDrone = true;
-
                     //Day ends if the players battery reaches 0
                     endDay();
                 }
