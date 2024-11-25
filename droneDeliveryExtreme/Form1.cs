@@ -719,114 +719,66 @@ namespace droneDeliveryExtreme
         }
 
         //Responsible for checking if the parcel has been delivered to the correct household updating lblParcel, lblCash, and lblObjective with current variables
-        private void deliverTimer_Tick(object sender, EventArgs e)
-        {
-            if ((parcelAttached == false) && houseCollisions(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom))
-            {
+        private void deliverTimer_Tick(object sender, EventArgs e){
+            if ((parcelAttached == false) && houseCollisions(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)){
                 //the correct house is selected
-                if (houseCheck[curDay - 1, parcelsDelivered] == houseNumCheck(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom))
-                {
+                if (houseCheck[curDay - 1, parcelsDelivered] == houseNumCheck(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)){
                     parcelFall = false;
-                    fallSpeed = 1;
-                    fallCount = 1;
+                    fallSpeed = 1; fallCount = 1;
                     parcelsDelivered++;
-
                     //Delivered damaged parcels yield less profit
-                    if (parcelDamaged == true)
-                    {
-                        curCash += 25;
-                        cashEarned[curDay - 1] += 25;
-                        parcelsDeliveredCorrectly += 0.5;
-                        parcelsDeliveredAll[curDay - 1] += 0.5;
-                        dayPts[curDay - 1] += 50;
-                        totalPts += 50;
+                    if (parcelDamaged == true){
+                        curCash += 25; cashEarned[curDay - 1] += 25;
+                        parcelsDeliveredCorrectly += 0.5; parcelsDeliveredAll[curDay - 1] += 0.5;
+                        dayPts[curDay - 1] += 50; totalPts += 50;
                     }
                     //Broken parcels will not give any money
-                    else if (parcelBroken == false)
-                    {
-                        curCash += 50;
-                        cashEarned[curDay - 1] += 50;
-                        parcelsDeliveredCorrectly++;
-                        parcelsDeliveredAll[curDay - 1]++;
-                        dayPts[curDay - 1] += 100;
-                        totalPts += 100;
+                    else if (parcelBroken == false){
+                        curCash += 50; cashEarned[curDay - 1] += 50;
+                        parcelsDeliveredCorrectly++; parcelsDeliveredAll[curDay - 1]++;
+                        dayPts[curDay - 1] += 100; totalPts += 100;
                     }
                     //Parcel disapears off the screemn
                     playerParcel.Left -= 1000;
                     playerParcel.Visible = false;
-                    parcelBroken = false;
-                    parcelDamaged = false;
-
+                    parcelBroken = false; parcelDamaged = false;
                     //Cash label is updated to represent the new value
                     lblCash.Text = "CASH: " + curCash;
                 }
                 //The wrong house is selected
-                else
-                {
+                else {
                     angryHouse = true;
                     curHouse = houseNumCheck(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom);
-                    if (curRoad == 2)
-                    {
-                        curHouse -= 3;
-                    }
+                    if (curRoad == 2){curHouse -= 3;}
                     parcelFall = false;
-                    fallSpeed = 1;
-                    fallCount = 1;
-
+                    fallSpeed = 1; fallCount = 1;
                     playerParcel.Left -= 1000;
                     playerParcel.Visible = false;
-                    parcelBroken = false;
-                    parcelDamaged = false;
+                    parcelBroken = false; parcelDamaged = false;
                     parcelsDelivered++;
                 }
-
                 //The amount of parcels delivered is updated
                 lblParcel.Text = "PARCELS: " + parcelsDelivered + "/" + totalParcels[curDay - 1];
-
                 //Extra time begins once all parcels have been delivered for the day
-                if (totalParcels[curDay - 1] == parcelsDelivered)
-                {
-                    startExtraTime();
-                }
+                if (totalParcels[curDay - 1] == parcelsDelivered){startExtraTime();}
                 //If there are more parcels remaining the player is informed what house is next on the list
-                else
-                {
-                    lblObjective.Text = "OBJECTIVE: Deliver to " + houseName[curDay - 1, parcelsDelivered];
-                }
+                else{lblObjective.Text = "OBJECTIVE: Deliver to " + houseName[curDay - 1, parcelsDelivered];}
             }
             //Parcel lands on the ground instead of a house
-            else if ((parcelAttached == false) && groundCollisions(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom + 12) && (playerParcel.Left != parcelArea.Left && playerParcel.Top != parcelArea.Top))
-            {
+            else if ((parcelAttached == false) && groundCollisions(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom + 12) && (playerParcel.Left != parcelArea.Left && playerParcel.Top != parcelArea.Top)){
                 parcelFall = false;
-                fallSpeed = 1;
-                fallCount = 1;
+                fallSpeed = 1; fallCount = 1;
                 //If the player is already at the post office, the next parcel shows up where it should be if there are more remaining
-                if (curRoad == 1 && parcelsDelivered < 4)
-                {
-                    playerParcel.Left = parcelArea.Left;
-                    playerParcel.Top = parcelArea.Top;
-                }
+                if (curRoad == 1 && parcelsDelivered < 4){playerParcel.Left = parcelArea.Left; playerParcel.Top = parcelArea.Top;}
                 //Parcel is destroyed(dissapears)
-                else
-                {
-                    playerParcel.Left -= 1000;
-                    playerParcel.Visible = false;
-                }
-                parcelBroken = false;
-                parcelDamaged = false;
+                else{playerParcel.Left -= 1000; playerParcel.Visible = false;}
+                parcelBroken = false; parcelDamaged = false;
                 parcelsDelivered++;
                 lblParcel.Text = "PARCELS: " + parcelsDelivered + "/" + totalParcels[curDay - 1];
-
                 //Extra time begins once all parcels have been delivered for the day
-                if (totalParcels[curDay - 1] == parcelsDelivered)
-                {
-                    startExtraTime();
-                }
+                if (totalParcels[curDay - 1] == parcelsDelivered){startExtraTime();}
                 //If there are more parcels remaining the player is informed what house is next on the list
-                else
-                {
-                    lblObjective.Text = "OBJECTIVE: Deliver to " + houseName[curDay - 1, parcelsDelivered];
-                }
+                else{lblObjective.Text = "OBJECTIVE: Deliver to " + houseName[curDay - 1, parcelsDelivered];}
             }
         }
 
