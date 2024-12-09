@@ -1285,17 +1285,13 @@ namespace droneDeliveryExtreme
         }
 
         //Responsible for the movement of the enemies and what directions they should shoot
-        private void enemyTimer_Tick(object sender, EventArgs e)
-        {
-            if (enemyActivea == true)
-            {
+        private void enemyTimer_Tick(object sender, EventArgs e){
+            if (enemyActivea == true){
                 //Enemy move up towards player
-                if ((enemyDrone.Top > playerDrone.Top) && !droneCollisions(enemyDrone.Left, enemyDrone.Right, enemyDrone.Top-6, enemyDrone.Bottom))
-                {
+                if ((enemyDrone.Top > playerDrone.Top) && !droneCollisions(enemyDrone.Left, enemyDrone.Right, enemyDrone.Top-6, enemyDrone.Bottom)){
                     enemyDrone.Top = enemyDrone.Top - 1;
                     /*
-                    if (enemyShootUp == false && enemyShoot == false)
-                    {
+                    if (enemyShootUp == false && enemyShoot == false){
                         enemyBulletU.Left = enemyDrone.Left;
                         enemyBulletU.Top = enemyDrone.Top;
                         enemyShoot = true;
@@ -1304,12 +1300,10 @@ namespace droneDeliveryExtreme
                     */
                 }
                 //Enemy move down towards player
-                if ((enemyDrone.Top < playerDrone.Top)  && !droneCollisions(enemyDrone.Left, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom+6))
-                {
+                if ((enemyDrone.Top < playerDrone.Top)  && !droneCollisions(enemyDrone.Left, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom+6)){
                     enemyDrone.Top = enemyDrone.Top + 1;
                     /*
-                    if (enemyShootDown == false && enemyShoot == false)
-                    {
+                    if (enemyShootDown == false && enemyShoot == false){
                         enemyBulletD.Left = enemyDrone.Left;
                         enemyBulletD.Top = enemyDrone.Top;
                         enemyShoot = true;
@@ -1317,13 +1311,10 @@ namespace droneDeliveryExtreme
                     }
                     */
                 }
-
                 //Enemy move left towards player 
-                if ((enemyDrone.Left > playerDrone.Left)  && !droneCollisions(enemyDrone.Left-6, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom))
-                {
+                if ((enemyDrone.Left > playerDrone.Left)  && !droneCollisions(enemyDrone.Left-6, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom)){
                     enemyDrone.Left = enemyDrone.Left - 1;
-                    if (enemyShootLeft == false && enemyShoot == false)
-                    {
+                    if (enemyShootLeft == false && enemyShoot == false){
                         enemyBulletL.Left = enemyDrone.Left;
                         enemyBulletL.Top = enemyDrone.Top;
                         enemyShoot = true;
@@ -1331,8 +1322,7 @@ namespace droneDeliveryExtreme
                     }
                 }
                 //Enemy move right towards player
-                if ((enemyDrone.Left < playerDrone.Left)  && !droneCollisions(enemyDrone.Left, enemyDrone.Right+6, enemyDrone.Top, enemyDrone.Bottom))
-                {
+                if ((enemyDrone.Left < playerDrone.Left)  && !droneCollisions(enemyDrone.Left, enemyDrone.Right+6, enemyDrone.Top, enemyDrone.Bottom)){
                     enemyDrone.Left = enemyDrone.Left + 1;
                     if (enemyShootRight == false && enemyShoot == false)
                     {
@@ -1343,25 +1333,15 @@ namespace droneDeliveryExtreme
                     }
                 }
             }
-
-            if (enemyActiveb == true)
-            {
+            if (enemyActiveb == true){
                 //Bonus enemy move up towards player
-                if ((enemyDeliverer.Top > playerDrone.Top) && !droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right, enemyDeliverer.Top - 6, enemyDeliverer.Bottom))
-                {
-                    enemyDeliverer.Top = enemyDeliverer.Top - 1;
-                }
+                if ((enemyDeliverer.Top > playerDrone.Top) && !droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right, enemyDeliverer.Top - 6, enemyDeliverer.Bottom)){enemyDeliverer.Top = enemyDeliverer.Top - 1;}
                 //Bonus enemy move dowm towards player
-                if ((enemyDeliverer.Top < playerDrone.Top) && !droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom + 6))
-                {
-                    enemyDeliverer.Top = enemyDeliverer.Top + 1;
-                }
+                if ((enemyDeliverer.Top < playerDrone.Top) && !droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom + 6)){enemyDeliverer.Top = enemyDeliverer.Top + 1;}
                 //Bonus enemy move left towards player
-                if ((enemyDeliverer.Left > playerDrone.Left) && !droneCollisions(enemyDeliverer.Left - 6, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom))
-                {
+                if ((enemyDeliverer.Left > playerDrone.Left) && !droneCollisions(enemyDeliverer.Left - 6, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom)){
                     enemyDeliverer.Left = enemyDeliverer.Left - 1;
-                    if (enemyShootLeftB == false && enemyShootB == false)
-                    {
+                    if (enemyShootLeftB == false && enemyShootB == false){
                         enemyBulletL2.Left = enemyDeliverer.Left;
                         enemyBulletL2.Top = enemyDeliverer.Top;
                         enemyShootB = true;
@@ -1369,11 +1349,9 @@ namespace droneDeliveryExtreme
                     }
                 }
                 //Bonus enemy move right towards player
-                if ((enemyDeliverer.Left < playerDrone.Left) && !droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right + 6, enemyDeliverer.Top, enemyDeliverer.Bottom))
-                {
+                if ((enemyDeliverer.Left < playerDrone.Left) && !droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right + 6, enemyDeliverer.Top, enemyDeliverer.Bottom)){
                     enemyDeliverer.Left = enemyDeliverer.Left + 1;
-                    if (enemyShootRightB == false && enemyShootB == false)
-                    {
+                    if (enemyShootRightB == false && enemyShootB == false){
                         enemyBulletR2.Left = enemyDeliverer.Left;
                         enemyBulletR2.Top = enemyDeliverer.Top;
                         enemyShootB = true;
