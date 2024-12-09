@@ -1361,10 +1361,7 @@ namespace droneDeliveryExtreme
             }
         }
 
-        private void gameHud_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void gameHud_Click(object sender, EventArgs e){}
 
         //Responsible for removing bullets off the screen if they happen to be shot, damages/destroys the parcel when shot =, and updates the enemy's look based on their health
         private void collisionTimer_Tick(object sender, EventArgs e)
