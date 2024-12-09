@@ -1390,108 +1390,51 @@ namespace droneDeliveryExtreme
             else{enemyDeliverer.Image = delivererDroneFixedPic.Image;}
         }
         //Responsible for moving all of the drones in random directions
-        private void windTimer_Tick(object sender, EventArgs e)
-        {
+        private void windTimer_Tick(object sender, EventArgs e){
             //Random numbers between 1 and 5 are selected
-            playerWind = playerRng.Next(1, 5);
-            enemyWind = enemyRng.Next(1, 5);
-            delivererWind = delivererRng.Next(1, 5);
-
-            if (curBattery > 0)
-            {
+            playerWind = playerRng.Next(1, 5); enemyWind = enemyRng.Next(1, 5); delivererWind = delivererRng.Next(1, 5);
+            if (curBattery > 0){
                 //player moves up
-                if ((playerWind == 1) && (!droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top - 6, playerDrone.Bottom)))
-                {
+                if ((playerWind == 1) && (!droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top - 6, playerDrone.Bottom))){
                     playerDrone.Top = playerDrone.Top - 2;
                     //parcel moves up
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top - 6, playerParcel.Bottom)))
-                    {
-                        playerParcel.Top = playerParcel.Top - 2;
-                    }
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top - 6, playerParcel.Bottom))){playerParcel.Top = playerParcel.Top - 2;}
                 }
                 //player moves down
-                if ((playerWind == 2) && (!droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom + 6)))
-                {
+                if ((playerWind == 2) && (!droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom + 6))){
                     playerDrone.Top = playerDrone.Top + 2;
                     //parcel moves down
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom + 6)))
-                    {
-                        playerParcel.Top = playerParcel.Top + 2;
-                    }
-                }
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top, playerParcel.Bottom + 6))){playerParcel.Top = playerParcel.Top + 2;}}
                 //player moves left
-                if ((playerWind == 3) && (!droneCollisions(playerDrone.Left - 6, playerDrone.Right, playerDrone.Top, playerDrone.Bottom)))
-                {
-                    if (playerDrone.Left > this.Width - 1000)
-                    {
-                        playerDrone.Left = playerDrone.Left - 2;
-                    }
+                if ((playerWind == 3) && (!droneCollisions(playerDrone.Left - 6, playerDrone.Right, playerDrone.Top, playerDrone.Bottom))){
+                    if (playerDrone.Left > this.Width - 1000){playerDrone.Left = playerDrone.Left - 2;}
                     //parcel moves left
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left - 6, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Left < this.Width - 1000))
-                    {
-                        playerParcel.Left = playerParcel.Left - 2;
-                    }
-                }
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left - 6, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Left < this.Width - 1000)){playerParcel.Left = playerParcel.Left - 2;}}
                 //player moves right
-                if ((playerWind == 4) && (!droneCollisions(playerDrone.Left, playerDrone.Right + 6, playerDrone.Top, playerDrone.Bottom)))
-                {
-                    if (playerDrone.Right < this.Width - 30)
-                    {
-                        playerDrone.Left = playerDrone.Left + 2;
-                    }
+                if ((playerWind == 4) && (!droneCollisions(playerDrone.Left, playerDrone.Right + 6, playerDrone.Top, playerDrone.Bottom))){
+                    if (playerDrone.Right < this.Width - 30){playerDrone.Left = playerDrone.Left + 2;}
                     //parcel moves right
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right+6, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Right > this.Width - 30))
-                    {
-                        playerParcel.Left = playerParcel.Left + 2;
-                    }
-                }
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right+6, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Right > this.Width - 30)){playerParcel.Left = playerParcel.Left + 2;}}
             }
-
-            if (enemyActivea == true)
-            {
+            if (enemyActivea == true){
                 //enemy moves up
-                if ((enemyWind == 1) && (!droneCollisions(enemyDrone.Left, enemyDrone.Right, enemyDrone.Top - 6, enemyDrone.Bottom)))
-                {
-                    enemyDrone.Top = enemyDrone.Top - 2;
-                }
+                if ((enemyWind == 1) && (!droneCollisions(enemyDrone.Left, enemyDrone.Right, enemyDrone.Top - 6, enemyDrone.Bottom))){enemyDrone.Top = enemyDrone.Top - 2;}
                 //enemy moves down
-                if ((enemyWind == 2) && (!droneCollisions(enemyDrone.Left, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom + 6)))
-                {
-                    enemyDrone.Top = enemyDrone.Top + 2;
-                }
+                if ((enemyWind == 2) && (!droneCollisions(enemyDrone.Left, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom + 6))){enemyDrone.Top = enemyDrone.Top + 2;}
                 //enemy moves left
-                if ((enemyWind == 3) && (!droneCollisions(enemyDrone.Left - 6, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Left < this.Width - 1000))
-                {
-                    enemyDrone.Left = enemyDrone.Left - 2;
-                }
+                if ((enemyWind == 3) && (!droneCollisions(enemyDrone.Left - 6, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Left < this.Width - 1000)){enemyDrone.Left = enemyDrone.Left - 2;}
                 //enemy moves right
-                if ((enemyWind == 4) && (!droneCollisions(enemyDrone.Left, enemyDrone.Right + 6, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Left > this.Width - 30))
-                {
-                    enemyDrone.Left = enemyDrone.Left + 2;
-                }
+                if ((enemyWind == 4) && (!droneCollisions(enemyDrone.Left, enemyDrone.Right + 6, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Left > this.Width - 30)){enemyDrone.Left = enemyDrone.Left + 2;}
             }
-            if (enemyActiveb == true)
-            {
+            if (enemyActiveb == true){
                 //bonus enemy moves up
-                if ((delivererWind == 1) && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right, enemyDeliverer.Top - 6, enemyDeliverer.Bottom)))
-                {
-                    enemyDeliverer.Top = enemyDeliverer.Top - 2;
-                }
+                if ((delivererWind == 1) && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right, enemyDeliverer.Top - 6, enemyDeliverer.Bottom))){enemyDeliverer.Top = enemyDeliverer.Top - 2;}
                 //bonus enemy moves down
-                if ((delivererWind == 2) && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom + 6)))
-                {
-                    enemyDeliverer.Top = enemyDeliverer.Top + 2;
-                }
+                if ((delivererWind == 2) && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom + 6))){enemyDeliverer.Top = enemyDeliverer.Top + 2;}
                 //bonus enemy moves left
-                if ((delivererWind == 3) && (!droneCollisions(enemyDeliverer.Left - 6, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Left < this.Width - 1000))
-                {
-                    enemyDeliverer.Left = enemyDeliverer.Left - 2;
-                }
+                if ((delivererWind == 3) && (!droneCollisions(enemyDeliverer.Left - 6, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Left < this.Width - 1000)){enemyDeliverer.Left = enemyDeliverer.Left - 2;}
                 //bonus enemy moves right
-                if ((delivererWind == 4) && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right + 6, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Left > this.Width - 30))
-                {
-                    enemyDeliverer.Left = enemyDeliverer.Left + 2;
-                }
+                if ((delivererWind == 4) && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right + 6, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Left > this.Width - 30)){enemyDeliverer.Left = enemyDeliverer.Left + 2;}
             }
         }
 
