@@ -1452,155 +1452,67 @@ namespace droneDeliveryExtreme
         }
 
         //Responsible for moving drones and parcels left or right at different forces depending on the value of windDay[]
-        private void windyTimer_Tick(object sender, EventArgs e)
-        {
-
+        private void windyTimer_Tick(object sender, EventArgs e){
             if (windDay[curDay - 1] == 1) //weak left wind
             {
                 windArrow.Image = greenArrowL.Image;
-                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left - 6, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Left < this.Width - 1000))
-                {
-                    enemyDrone.Left = enemyDrone.Left - 1;
-                }
-                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left - 6, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Left < this.Width - 1000))
-                {
-                    enemyDeliverer.Left = enemyDeliverer.Left - 1;
-                }
-                if (droneUpgraded == false)
-                {
-                    if (!droneCollisions(playerDrone.Left - 6, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Left < this.Width - 1000))
-                    {
-                        playerDrone.Left = playerDrone.Left - 1;
-                    }
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left - 6, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Left < this.Width - 1000))
-                    {
-                        playerParcel.Left = playerParcel.Left - 1;
-                    }
-                }
-
+                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left - 6, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Left < this.Width - 1000)){enemyDrone.Left = enemyDrone.Left - 1;}
+                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left - 6, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Left < this.Width - 1000)){enemyDeliverer.Left = enemyDeliverer.Left - 1;}
+                if (droneUpgraded == false){
+                    if (!droneCollisions(playerDrone.Left - 6, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Left < this.Width - 1000)){playerDrone.Left = playerDrone.Left - 1;}
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left - 6, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Left < this.Width - 1000)){playerParcel.Left = playerParcel.Left - 1;}}
             }
             if (windDay[curDay - 1] == 2) //weak right wind
             {
                 windArrow.Image = greenArrowR.Image;
-                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left, enemyDrone.Right + 6, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Right > this.Width - 30))
-                {
-                    enemyDrone.Left = enemyDrone.Left + 1;
+                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left, enemyDrone.Right + 6, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Right > this.Width - 30)){enemyDrone.Left = enemyDrone.Left + 1;}
+                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right + 6, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Right > this.Width - 30)){enemyDeliverer.Left = enemyDeliverer.Left + 1;}
+                if (droneUpgraded == false){
+                    if (!droneCollisions(playerDrone.Left, playerDrone.Right + 6, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Right > this.Width - 30)){playerDrone.Left = playerDrone.Left + 1;}
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right + 6, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Right > this.Width - 30)){playerParcel.Left = playerParcel.Left + 1;}
                 }
-                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right + 6, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Right > this.Width - 30))
-                {
-                    enemyDeliverer.Left = enemyDeliverer.Left + 1;
-                }
-                if (droneUpgraded == false)
-                {
-                    if (!droneCollisions(playerDrone.Left, playerDrone.Right + 6, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Right > this.Width - 30))
-                    {
-                        playerDrone.Left = playerDrone.Left + 1;
-                    }
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right + 6, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Right > this.Width - 30))
-                    {
-                        playerParcel.Left = playerParcel.Left + 1;
-                    }
-                }
-
             }
             if (windDay[curDay - 1] == 3) //medium left wind
             {
                 windArrow.Image = orangeArrowL.Image;
-                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left - 6, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Left < this.Width - 1000))
-                {
-                    enemyDrone.Left = enemyDrone.Left - 2;
+                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left - 6, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Left < this.Width - 1000)){enemyDrone.Left = enemyDrone.Left - 2;}
+                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left - 6, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Left < this.Width - 1000)){enemyDeliverer.Left = enemyDeliverer.Left - 2;}
+                if (droneUpgraded == false){
+                    if (!droneCollisions(playerDrone.Left - 6, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Left < this.Width - 1000)){playerDrone.Left = playerDrone.Left - 2;}
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left - 6, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Left < this.Width - 1000)){playerParcel.Left = playerParcel.Left - 2;}
                 }
-                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left - 6, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Left < this.Width - 1000))
-                {
-                    enemyDeliverer.Left = enemyDeliverer.Left - 2;
-                }
-                if (droneUpgraded == false)
-                {
-                    if (!droneCollisions(playerDrone.Left - 6, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Left < this.Width - 1000))
-                    {
-                        playerDrone.Left = playerDrone.Left - 2;
-                    }
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left - 6, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Left < this.Width - 1000))
-                    {
-                        playerParcel.Left = playerParcel.Left - 2;
-                    }
-                }
-
             }
             if (windDay[curDay - 1] == 4) //medium right wind
             {
                 windArrow.Image = orangeArrowR.Image;
-                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left, enemyDrone.Right + 6, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Right > this.Width - 30))
-                {
-                    enemyDrone.Left = enemyDrone.Left + 2;
+                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left, enemyDrone.Right + 6, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Right > this.Width - 30)){enemyDrone.Left = enemyDrone.Left + 2;}
+                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right + 6, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Right > this.Width - 30)){enemyDeliverer.Left = enemyDeliverer.Left + 2;}
+                if (droneUpgraded == false){
+                    if (!droneCollisions(playerDrone.Left, playerDrone.Right + 6, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Right > this.Width - 30)){playerDrone.Left = playerDrone.Left + 2;}
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right + 6, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Right > this.Width - 30)){playerParcel.Left = playerParcel.Left + 2;}
                 }
-                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right + 6, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Right > this.Width - 30))
-                {
-                    enemyDeliverer.Left = enemyDeliverer.Left + 2;
-                }
-                if (droneUpgraded == false)
-                {
-                    if (!droneCollisions(playerDrone.Left, playerDrone.Right + 6, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Right > this.Width - 30))
-                    {
-                        playerDrone.Left = playerDrone.Left + 2;
-                    }
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right + 6, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Right > this.Width - 30))
-                    {
-                        playerParcel.Left = playerParcel.Left + 2;
-                    }
-                }
-
             }
             if (windDay[curDay - 1] == 5) //strong left wind
             {
                 windArrow.Image = redArrowL.Image;
-                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left - 6, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Left < this.Width - 1000))
-                {
-                    enemyDrone.Left = enemyDrone.Left - 3;
+                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left - 6, enemyDrone.Right, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Left < this.Width - 1000)){enemyDrone.Left = enemyDrone.Left - 3;}
+                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left - 6, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Left < this.Width - 1000)){enemyDeliverer.Left = enemyDeliverer.Left - 3;}
+                if (droneUpgraded == false){
+                    if (!droneCollisions(playerDrone.Left - 6, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Left < this.Width - 1000)){playerDrone.Left = playerDrone.Left - 3;}
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left - 6, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Left < this.Width - 1000)){playerParcel.Left = playerParcel.Left - 3;}
                 }
-                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left - 6, enemyDeliverer.Right, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Left < this.Width - 1000))
-                {
-                    enemyDeliverer.Left = enemyDeliverer.Left - 3;
-                }
-                if (droneUpgraded == false)
-                {
-                    if (!droneCollisions(playerDrone.Left - 6, playerDrone.Right, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Left < this.Width - 1000))
-                    {
-                        playerDrone.Left = playerDrone.Left - 3;
-                    }
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left - 6, playerParcel.Right, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Left < this.Width - 1000))
-                    {
-                        playerParcel.Left = playerParcel.Left - 3;
-                    }
-                }
-
             }
             if (windDay[curDay - 1] == 6) //strong right wind
             {
                 windArrow.Image = redArrowR.Image;
-                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left, enemyDrone.Right + 6, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Right > this.Width - 30))
-                {
-                    enemyDrone.Left = enemyDrone.Left + 3;
+                if (enemyActivea == true && (!droneCollisions(enemyDrone.Left, enemyDrone.Right + 6, enemyDrone.Top, enemyDrone.Bottom)) && !(enemyDrone.Right > this.Width - 30)){enemyDrone.Left = enemyDrone.Left + 3;}
+                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right + 6, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Right > this.Width - 30)){enemyDeliverer.Left = enemyDeliverer.Left + 3;}
+                if (droneUpgraded == false){
+                    if (!droneCollisions(playerDrone.Left, playerDrone.Right + 6, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Right > this.Width - 30)){playerDrone.Left = playerDrone.Left + 3;}
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right + 6, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Right > this.Width - 30)){playerParcel.Left = playerParcel.Left + 3;}
                 }
-                if (enemyActiveb == true && (!droneCollisions(enemyDeliverer.Left, enemyDeliverer.Right + 6, enemyDeliverer.Top, enemyDeliverer.Bottom)) && !(enemyDeliverer.Right > this.Width - 30))
-                {
-                    enemyDeliverer.Left = enemyDeliverer.Left + 3;
-                }
-                if (droneUpgraded == false)
-                {
-                    if (!droneCollisions(playerDrone.Left, playerDrone.Right + 6, playerDrone.Top, playerDrone.Bottom) && !(playerDrone.Right > this.Width - 30))
-                    {
-                        playerDrone.Left = playerDrone.Left + 3;
-                    }
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right + 6, playerParcel.Top, playerParcel.Bottom)) && !(playerParcel.Right > this.Width - 30))
-                    {
-                        playerParcel.Left = playerParcel.Left + 3;
-                    }
-                }
-
             }
         }
-
         //Responsible for spawning both the standard enemy and the bonus enemy, with a 10% chance to spawn each second and a 50% chance to spawn on either side
         private void spawnTimer_Tick(object sender, EventArgs e)
         {
