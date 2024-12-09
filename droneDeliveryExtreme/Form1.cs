@@ -1398,8 +1398,7 @@ namespace droneDeliveryExtreme
                 if ((playerWind == 1) && (!droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top - 6, playerDrone.Bottom))){
                     playerDrone.Top = playerDrone.Top - 2;
                     //parcel moves up
-                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top - 6, playerParcel.Bottom))){playerParcel.Top = playerParcel.Top - 2;}
-                }
+                    if ((parcelAttached == true) && (!droneCollisionsExcHouse(playerParcel.Left, playerParcel.Right, playerParcel.Top - 6, playerParcel.Bottom))){playerParcel.Top = playerParcel.Top - 2;}}
                 //player moves down
                 if ((playerWind == 2) && (!droneCollisions(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom + 6))){
                     playerDrone.Top = playerDrone.Top + 2;
