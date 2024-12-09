@@ -1364,68 +1364,31 @@ namespace droneDeliveryExtreme
         private void gameHud_Click(object sender, EventArgs e){}
 
         //Responsible for removing bullets off the screen if they happen to be shot, damages/destroys the parcel when shot =, and updates the enemy's look based on their health
-        private void collisionTimer_Tick(object sender, EventArgs e)
-        {
-            if (enemyCollision(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom))
-            {
-                enemyBulletU.Top = enemyBulletU.Top - 1000;
-                enemyBulletD.Top = enemyBulletD.Top - 1000;
-                enemyBulletL.Left = enemyBulletL.Top - 1000;
-                enemyBulletR.Left = enemyBulletR.Top - 1500;
-
-                enemyBulletL2.Left = enemyBulletL2.Top - 1000;
-                enemyBulletR2.Left = enemyBulletR2.Top - 1500;
-
+        private void collisionTimer_Tick(object sender, EventArgs e){
+            if (enemyCollision(playerDrone.Left, playerDrone.Right, playerDrone.Top, playerDrone.Bottom)){
+                enemyBulletU.Top = enemyBulletU.Top - 1000; enemyBulletD.Top = enemyBulletD.Top - 1000;
+                enemyBulletL.Left = enemyBulletL.Top - 1000; enemyBulletR.Left = enemyBulletR.Top - 1500;
+                enemyBulletL2.Left = enemyBulletL2.Top - 1000; enemyBulletR2.Left = enemyBulletR2.Top - 1500;
                 //Parcel is damaged when shit if not damaged already
-                if (parcelAttached == true && parcelDamaged == false)
-                {
-                    parcelDamaged = true;
-                }
+                if (parcelAttached == true && parcelDamaged == false){parcelDamaged = true;}
                 //Destroys parcel that is damaged already
-                else if (parcelAttached == true && parcelDamaged == true)
-                {
+                else if (parcelAttached == true && parcelDamaged == true){
                     parcelDamaged = false;
                     parcelBroken = true;
                     parcelAttached = false;
                     parcelFall = true;
-                }
-                else
-                {
-                    curBattery -= 1001;
-                }
+                }else{curBattery -= 1001;}
             }
-
             //Updeates parcels image representing its health
-            if (parcelDamaged == true)
-            {
-                playerParcel.Image = parcelDamagedPic.Image;
-            }
-            else
-            {
-                playerParcel.Image = parcelFixedPic.Image;
-            }
-
+            if (parcelDamaged == true){playerParcel.Image = parcelDamagedPic.Image;}
+            else{playerParcel.Image = parcelFixedPic.Image;}
             //Updates enemies image representing its health
-            if (enemyDamaged == true)
-            {
-                enemyDrone.Image = enemyDroneDamagedPic.Image;
-            }
-            else
-            {
-                enemyDrone.Image = enemyDroneFixedPic.Image;
-            }
-
+            if (enemyDamaged == true){enemyDrone.Image = enemyDroneDamagedPic.Image;}
+            else{enemyDrone.Image = enemyDroneFixedPic.Image;}
             //Updated bonus enemies image representing its health
-            if (enemyDamagedB == true)
-            {
-                enemyDeliverer.Image = delivererDroneDamagedPic.Image;
-            }
-            else
-            {
-                enemyDeliverer.Image = delivererDroneFixedPic.Image;
-            }
+            if (enemyDamagedB == true){enemyDeliverer.Image = delivererDroneDamagedPic.Image;}
+            else{enemyDeliverer.Image = delivererDroneFixedPic.Image;}
         }
-
         //Responsible for moving all of the drones in random directions
         private void windTimer_Tick(object sender, EventArgs e)
         {
