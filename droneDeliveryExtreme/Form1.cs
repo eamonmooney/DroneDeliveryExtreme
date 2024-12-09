@@ -1514,76 +1514,49 @@ namespace droneDeliveryExtreme
             }
         }
         //Responsible for spawning both the standard enemy and the bonus enemy, with a 10% chance to spawn each second and a 50% chance to spawn on either side
-        private void spawnTimer_Tick(object sender, EventArgs e)
-        {
-            if ((curRoad == 0 || curRoad == 2) && enemyActivea == false)
-            {
+        private void spawnTimer_Tick(object sender, EventArgs e){
+            if ((curRoad == 0 || curRoad == 2) && enemyActivea == false){
                 enemySpawner = spawnEnemy.Next(0, 20);
                 //spawn enemy on the left
-                if (enemySpawner == 1)
-                {
+                if (enemySpawner == 1){
                     enemyDrone.Visible = true;
                     enemyDrone.Left = 12;
                     enemyDrone.Top = 107;
                     enemyFallSpeed = 1;
-                    enemyDamaged = false;
-                    enemyActivea = true;
-                    enemyShoot = false;
-                    enemyShootUp = false;
-                    enemyShootDown = false;
-                    enemyShootLeft = false;
-                    enemyShootRight = false;
+                    enemyDamaged = false; enemyActivea = true; enemyShoot = false;
+                    enemyShootUp = false; enemyShootDown = false; enemyShootLeft = false; enemyShootRight = false;
                 }
                 //spawn enemy on the right
-                if (enemySpawner == 2)
-                {
-                    enemyDrone.Visible = true;
-                    enemyDamaged = false;
-                    enemyActivea = true;
+                if (enemySpawner == 2){
+                    enemyDrone.Visible = true; enemyDamaged = false; enemyActivea = true;
                     enemyDrone.Left = 900;
                     enemyDrone.Top = 118;
                     enemyFallSpeed = 1;
-                    enemyDamaged = false;
-                    enemyActivea = true;
-                    enemyShoot = false;
-                    enemyShootUp = false;
-                    enemyShootDown = false;
-                    enemyShootLeft = false;
-                    enemyShootRight = false;
+                    enemyDamaged = false; enemyActivea = true; enemyShoot = false;
+                    enemyShootUp = false; enemyShootDown = false;
+                    enemyShootLeft = false; enemyShootRight = false;
                 }
-            }
-            else if (curRoad == 3 && enemyActiveb == false)
-            {
+            } else if (curRoad == 3 && enemyActiveb == false) {
                 enemySpawner = spawnEnemy.Next(0, 20);
                 //spawn bonus enemy on the left
-                if (enemySpawner == 1)
-                {
+                if (enemySpawner == 1) {
                     enemyDeliverer.Visible = true;
-                    enemyDeliverer.Left = 56;
-                    enemyDeliverer.Top = 185;
-                    enemyFallSpeedB = 1;
-                    enemyDamagedB = false;
-                    enemyActiveb = true;
-                    enemyShootB = false;
-                    enemyShootUpB = false;
-                    enemyShootDownB = false;
-                    enemyShootLeftB = false;
-                    enemyShootRightB = false;
+                    enemyDeliverer.Left = 56; enemyDeliverer.Top = 185;
+                    enemyFallSpeedB = 1; enemyDamagedB = false;
+                    enemyActiveb = true; enemyShootB = false;
+                    enemyShootUpB = false; enemyShootDownB = false;
+                    enemyShootLeftB = false; enemyShootRightB = false;
                 }
                 //spawn bonus enemy on the right
-                if (enemySpawner == 2)
-                {
+                if (enemySpawner == 2){
                     enemyDeliverer.Visible = true;
                     enemyDeliverer.Left = 900;
                     enemyDeliverer.Top = 158;
                     enemyFallSpeedB = 1;
                     enemyDamagedB = false;
-                    enemyActiveb = true;
-                    enemyShootB = false;
-                    enemyShootUpB = false;
-                    enemyShootDownB = false;
-                    enemyShootLeftB = false;
-                    enemyShootRightB = false;
+                    enemyActiveb = true; enemyShootB = false;
+                    enemyShootUpB = false; enemyShootDownB = false;
+                    enemyShootLeftB = false; enemyShootRightB = false;
                 }
             }
         }
