@@ -1438,22 +1438,14 @@ namespace droneDeliveryExtreme
         }
 
         //Responsible for the response of the house throwing furniture if the player deliveres to the wrong house
-        private void angerTimer_Tick(object sender, EventArgs e)
-        {
+        private void angerTimer_Tick(object sender, EventArgs e){
             PictureBox[] angryHouses = { angryHouse1, angryHouse2, angryHouse3 };
             PictureBox[] curHouses = { house1, house2, house3 };
-
-            if (angryHouse == true && angryHouses[curHouse].Visible == false)
-            {
-                angryHouses[curHouse].Visible = true;
-            }
-            else if (angryHouse == true && angryHouses[curHouse].Visible == true)
-            {
+            if (angryHouse == true && angryHouses[curHouse].Visible == false){angryHouses[curHouse].Visible = true;}
+            else if (angryHouse == true && angryHouses[curHouse].Visible == true){
                 angryHouses[curHouse].Visible = false;
                 angryHouse = false;
-
                 houseShoot = true;
-
                 thrownFurniture.Top = curHouses[curHouse].Bottom;
                 thrownFurniture.Left = curHouses[curHouse].Left;
             }
