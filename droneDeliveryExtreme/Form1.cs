@@ -12,10 +12,8 @@ namespace droneDeliveryExtreme
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
+        public Form1(){InitializeComponent();}
+        
         //Determines if the player is currently moving in a direction
         bool playerUp = false, playerDown = false, playerLeft = false, playerRight = false;
         //Determines if the player has picked up the parcel
